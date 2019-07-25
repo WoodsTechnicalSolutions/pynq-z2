@@ -1,0 +1,14 @@
+/NA
+/device-tree-xlnx
+/embeddedsw
+/pynq_z2
+/sdk
+/*.patch
+*.jou
+*.log
+*.o
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
