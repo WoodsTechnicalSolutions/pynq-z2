@@ -14,13 +14,17 @@ all: bitstream fsbl
 embeddedsw-git:
 	@if ! [ -d embeddedsw ]; then \
 		git clone https://github.com/Xilinx/embeddedsw.git; \
-		(cd embeddedsw && git checkout xilinx-v$(SDK_RELEASE)); \
+		if [ -d embeddedsw ]; then \
+			(cd embeddedsw && git checkout xilinx-v$(SDK_RELEASE)); \
+		fi; \
 	fi
 
 devicetree-git:
 	@if ! [ -d device-tree-xlnx ]; then \
 		git clone https://github.com/Xilinx/device-tree-xlnx.git; \
-		(cd device-tree-xlnx && git checkout xilinx-v$(VIVADO_RELEASE)); \
+		if [ -d device-tree-xlnx ]; then \
+			(cd device-tree-xlnx && git checkout xilinx-v$(VIVADO_RELEASE)); \
+		fi; \
 	fi
 
 bitstream: devicetree-git
@@ -44,7 +48,9 @@ fsbl: embeddedsw-git
 		exit 2; \
 	fi
 	source $(SDK_BASE_DIR)/$(SDK_RELEASE)/settings64.sh && \
-		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make BOARD=zc702)
+	if [ -d embeddedsw/lib/sw_apps/zynq_fsbl/src ]; then \
+		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make BOARD=zc702); \
+	fi
 	@if ! [ -f embeddedsw/lib/sw_apps/zynq_fsbl/src/fsbl.elf ]; then \
 		printf "***** FSBL BUILD FAILED *****\n"; \
 		exit 2; \
@@ -55,7 +61,9 @@ fsbl: embeddedsw-git
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
 	source $(SDK_BASE_DIR)/$(SDK_RELEASE)/settings64.sh && \
-		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make $@ BOARD=zc702)
+	if [ -d embeddedsw/lib/sw_apps/zynq_fsbl/src ]; then \
+		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make $@ BOARD=zc702); \
+	fi
 
 distclean: clean
 	$(RM) -r sdk
