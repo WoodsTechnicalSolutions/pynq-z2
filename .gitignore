@@ -3,6 +3,7 @@
 /embeddedsw
 /pynq_z2
 /sdk
+/zynq-mkbootimage
 /*.patch
 *.jou
 *.log

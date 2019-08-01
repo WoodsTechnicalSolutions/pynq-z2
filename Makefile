@@ -27,6 +27,16 @@ devicetree-git:
 		fi; \
 	fi
 
+zynq-mkbootimage-git:
+	@if ! [ -d zynq-mkbootimage ]; then \
+		git clone https://github.com/antmicro/zynq-mkbootimage.git; \
+		if ! [ -d zynq-mkbootimage ]; then \
+			printf "***** GIT CLONE OF 'zynq-mkbootimage' FAILED *****\n"; \
+			exit 2; \
+		fi; \
+	fi
+	$(MAKE) -C zynq-mkbootimage
+
 bitstream: devicetree-git
 ifeq ($(DESIGN_FORCE),yes)
 bitstream: clean
