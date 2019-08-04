@@ -33,6 +33,11 @@ endif
 		printf "***** BITSTREAM GENERATION FAILED *****\n"; \
 		exit 2; \
 	fi
+	@if ! [ -f sdk/pcw.dtsi ] && ! [ -f sdk/pl.dtsi ]; then \
+		printf "***** DEVICETREE GENERATION FAILED *****\n"; \
+		exit 2; \
+	fi
+	@cp -av sdk/pcw.dtsi sdk/pl.dtsi sdk/system.dts sdk/system-top.dts dts/
 
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
