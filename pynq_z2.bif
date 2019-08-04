@@ -1,6 +1,0 @@
-the_ROM_image:
-{
-	[bootloader]sdk/fsbl.elf
-	sdk/pynq_z2_wrapper.bit
-	sdk/u-boot.elf
-}

@@ -7,17 +7,9 @@ VIVADO_RELEASE ?= 2019.1
 SDK_BASE_DIR ?= /tools/Xilinx/SDK
 SDK_RELEASE ?= $(VIVADO_RELEASE)
 
-.PHONY: all bitstream fsbl devicetree-git embeddedsw-git
+.PHONY: all bitstream devicetree-git
 
-all: bitstream fsbl
-
-embeddedsw-git:
-	@if ! [ -d embeddedsw ]; then \
-		git clone https://github.com/Xilinx/embeddedsw.git; \
-		if [ -d embeddedsw ]; then \
-			(cd embeddedsw && git checkout xilinx-v$(SDK_RELEASE)); \
-		fi; \
-	fi
+all: bitstream
 
 devicetree-git:
 	@if ! [ -d device-tree-xlnx ]; then \
@@ -26,16 +18,6 @@ devicetree-git:
 			(cd device-tree-xlnx && git checkout xilinx-v$(VIVADO_RELEASE)); \
 		fi; \
 	fi
-
-zynq-mkbootimage-git:
-	@if ! [ -d zynq-mkbootimage ]; then \
-		git clone https://github.com/antmicro/zynq-mkbootimage.git; \
-		if ! [ -d zynq-mkbootimage ]; then \
-			printf "***** GIT CLONE OF 'zynq-mkbootimage' FAILED *****\n"; \
-			exit 2; \
-		fi; \
-	fi
-	$(MAKE) -C zynq-mkbootimage
 
 bitstream: devicetree-git
 ifeq ($(DESIGN_FORCE),yes)
@@ -52,28 +34,8 @@ endif
 		exit 2; \
 	fi
 
-fsbl: embeddedsw-git
-	@if ! [ -d $(SDK_BASE_DIR)/$(SDK_RELEASE) ]; then \
-		printf "***** MISSING XILINX SDK v$(SDK_RELEASE) INSTALLATION *****\n"; \
-		exit 2; \
-	fi
-	source $(SDK_BASE_DIR)/$(SDK_RELEASE)/settings64.sh && \
-	if [ -d embeddedsw/lib/sw_apps/zynq_fsbl/src ]; then \
-		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make BOARD=zc702); \
-	fi
-	@if ! [ -f embeddedsw/lib/sw_apps/zynq_fsbl/src/fsbl.elf ]; then \
-		printf "***** FSBL BUILD FAILED *****\n"; \
-		exit 2; \
-	fi
-	@mkdir -p sdk
-	@cp -av embeddedsw/lib/sw_apps/zynq_fsbl/src/fsbl.elf sdk/
-
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
-	source $(SDK_BASE_DIR)/$(SDK_RELEASE)/settings64.sh && \
-	if [ -d embeddedsw/lib/sw_apps/zynq_fsbl/src ]; then \
-		(cd embeddedsw/lib/sw_apps/zynq_fsbl/src && make $@ BOARD=zc702); \
-	fi
 
 distclean: clean
 	$(RM) -r sdk
