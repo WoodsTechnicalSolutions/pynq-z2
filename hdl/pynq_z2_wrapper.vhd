@@ -1,7 +1,7 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2019.1 (lin64) Build 2552052 Fri May 24 14:47:09 MDT 2019
---Date        : Tue Jul 23 23:22:36 2019
+--Date        : Sun Aug  4 22:36:30 2019
 --Host        : hostname running 64-bit Arch Linux
 --Command     : generate_target pynq_z2_wrapper.bd
 --Design      : pynq_z2_wrapper
@@ -40,7 +40,7 @@ entity pynq_z2_wrapper is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
-    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 45 downto 0 );
+    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 53 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -57,15 +57,6 @@ entity pynq_z2_wrapper is
     PWM_3 : out STD_LOGIC;
     PWM_4 : out STD_LOGIC;
     PWM_5 : out STD_LOGIC;
---    SDIO_1_buspow : out STD_LOGIC;
---    SDIO_1_busvolt : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    SDIO_1_cdn : in STD_LOGIC;
-    SDIO_1_clk : out STD_LOGIC;
---    SDIO_1_clk_fb : in STD_LOGIC;
-    SDIO_1_cmd_io : inout STD_LOGIC;
-    SDIO_1_data_io : inout STD_LOGIC_VECTOR ( 3 downto 0 );
---    SDIO_1_led : out STD_LOGIC;
-    SDIO_1_wp : in STD_LOGIC;
     SPI_0_io0_io : inout STD_LOGIC;
     SPI_0_io1_io : inout STD_LOGIC;
     SPI_0_sck_io : inout STD_LOGIC;
@@ -92,12 +83,59 @@ architecture STRUCTURE of pynq_z2_wrapper is
     PWM_3 : out STD_LOGIC;
     PWM_4 : out STD_LOGIC;
     PWM_5 : out STD_LOGIC;
+    UART_1_txd : out STD_LOGIC;
+    UART_1_rxd : in STD_LOGIC;
+    EMIO_tri_i : in STD_LOGIC_VECTOR ( 53 downto 0 );
+    EMIO_tri_o : out STD_LOGIC_VECTOR ( 53 downto 0 );
+    EMIO_tri_t : out STD_LOGIC_VECTOR ( 53 downto 0 );
+    SPI_1_sck_i : in STD_LOGIC;
+    SPI_1_sck_o : out STD_LOGIC;
+    SPI_1_sck_t : out STD_LOGIC;
+    SPI_1_io0_i : in STD_LOGIC;
+    SPI_1_io0_o : out STD_LOGIC;
+    SPI_1_io0_t : out STD_LOGIC;
+    SPI_1_io1_i : in STD_LOGIC;
+    SPI_1_io1_o : out STD_LOGIC;
+    SPI_1_io1_t : out STD_LOGIC;
+    SPI_1_ss_i : in STD_LOGIC;
+    SPI_1_ss_o : out STD_LOGIC;
+    SPI_1_ss1_o : out STD_LOGIC;
+    SPI_1_ss2_o : out STD_LOGIC;
+    SPI_1_ss_t : out STD_LOGIC;
+    SPI_0_sck_i : in STD_LOGIC;
+    SPI_0_sck_o : out STD_LOGIC;
+    SPI_0_sck_t : out STD_LOGIC;
+    SPI_0_io0_i : in STD_LOGIC;
+    SPI_0_io0_o : out STD_LOGIC;
+    SPI_0_io0_t : out STD_LOGIC;
+    SPI_0_io1_i : in STD_LOGIC;
+    SPI_0_io1_o : out STD_LOGIC;
+    SPI_0_io1_t : out STD_LOGIC;
+    SPI_0_ss_i : in STD_LOGIC;
+    SPI_0_ss_o : out STD_LOGIC;
+    SPI_0_ss1_o : out STD_LOGIC;
+    SPI_0_ss2_o : out STD_LOGIC;
+    SPI_0_ss_t : out STD_LOGIC;
+    FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
+    FIXED_IO_ddr_vrn : inout STD_LOGIC;
+    FIXED_IO_ddr_vrp : inout STD_LOGIC;
+    FIXED_IO_ps_srstb : inout STD_LOGIC;
+    FIXED_IO_ps_clk : inout STD_LOGIC;
+    FIXED_IO_ps_porb : inout STD_LOGIC;
+    IIC_0_sda_i : in STD_LOGIC;
+    IIC_0_sda_o : out STD_LOGIC;
+    IIC_0_sda_t : out STD_LOGIC;
+    IIC_0_scl_i : in STD_LOGIC;
+    IIC_0_scl_o : out STD_LOGIC;
+    IIC_0_scl_t : out STD_LOGIC;
+    IIC_1_sda_i : in STD_LOGIC;
+    IIC_1_sda_o : out STD_LOGIC;
+    IIC_1_sda_t : out STD_LOGIC;
+    IIC_1_scl_i : in STD_LOGIC;
+    IIC_1_scl_o : out STD_LOGIC;
+    IIC_1_scl_t : out STD_LOGIC;
     ADC_3_v_n : in STD_LOGIC;
     ADC_3_v_p : in STD_LOGIC;
-    ADC_0_v_n : in STD_LOGIC;
-    ADC_0_v_p : in STD_LOGIC;
-    ADC_2_v_n : in STD_LOGIC;
-    ADC_2_v_p : in STD_LOGIC;
     ADC_1_v_n : in STD_LOGIC;
     ADC_1_v_p : in STD_LOGIC;
     ADC_5_v_n : in STD_LOGIC;
@@ -119,70 +157,10 @@ architecture STRUCTURE of pynq_z2_wrapper is
     DDR_dqs_p : inout STD_LOGIC_VECTOR ( 3 downto 0 );
     ADC_4_v_n : in STD_LOGIC;
     ADC_4_v_p : in STD_LOGIC;
-    FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
-    FIXED_IO_ddr_vrn : inout STD_LOGIC;
-    FIXED_IO_ddr_vrp : inout STD_LOGIC;
-    FIXED_IO_ps_srstb : inout STD_LOGIC;
-    FIXED_IO_ps_clk : inout STD_LOGIC;
-    FIXED_IO_ps_porb : inout STD_LOGIC;
-    EMIO_tri_i : in STD_LOGIC_VECTOR ( 45 downto 0 );
-    EMIO_tri_o : out STD_LOGIC_VECTOR ( 45 downto 0 );
-    EMIO_tri_t : out STD_LOGIC_VECTOR ( 45 downto 0 );
-    SDIO_1_clk : out STD_LOGIC;
---    SDIO_1_clk_fb : in STD_LOGIC;
-    SDIO_1_cmd_o : out STD_LOGIC;
-    SDIO_1_cmd_i : in STD_LOGIC;
-    SDIO_1_cmd_t : out STD_LOGIC;
-    SDIO_1_data_i : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    SDIO_1_data_o : out STD_LOGIC_VECTOR ( 3 downto 0 );
-    SDIO_1_data_t : out STD_LOGIC_VECTOR ( 3 downto 0 );
---    SDIO_1_led : out STD_LOGIC;
-    SDIO_1_cdn : in STD_LOGIC;
-    SDIO_1_wp : in STD_LOGIC;
---    SDIO_1_buspow : out STD_LOGIC;
---    SDIO_1_busvolt : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    IIC_0_sda_i : in STD_LOGIC;
-    IIC_0_sda_o : out STD_LOGIC;
-    IIC_0_sda_t : out STD_LOGIC;
-    IIC_0_scl_i : in STD_LOGIC;
-    IIC_0_scl_o : out STD_LOGIC;
-    IIC_0_scl_t : out STD_LOGIC;
-    IIC_1_sda_i : in STD_LOGIC;
-    IIC_1_sda_o : out STD_LOGIC;
-    IIC_1_sda_t : out STD_LOGIC;
-    IIC_1_scl_i : in STD_LOGIC;
-    IIC_1_scl_o : out STD_LOGIC;
-    IIC_1_scl_t : out STD_LOGIC;
-    SPI_0_sck_i : in STD_LOGIC;
-    SPI_0_sck_o : out STD_LOGIC;
-    SPI_0_sck_t : out STD_LOGIC;
-    SPI_0_io0_i : in STD_LOGIC;
-    SPI_0_io0_o : out STD_LOGIC;
-    SPI_0_io0_t : out STD_LOGIC;
-    SPI_0_io1_i : in STD_LOGIC;
-    SPI_0_io1_o : out STD_LOGIC;
-    SPI_0_io1_t : out STD_LOGIC;
-    SPI_0_ss_i : in STD_LOGIC;
-    SPI_0_ss_o : out STD_LOGIC;
-    SPI_0_ss1_o : out STD_LOGIC;
-    SPI_0_ss2_o : out STD_LOGIC;
-    SPI_0_ss_t : out STD_LOGIC;
-    SPI_1_sck_i : in STD_LOGIC;
-    SPI_1_sck_o : out STD_LOGIC;
-    SPI_1_sck_t : out STD_LOGIC;
-    SPI_1_io0_i : in STD_LOGIC;
-    SPI_1_io0_o : out STD_LOGIC;
-    SPI_1_io0_t : out STD_LOGIC;
-    SPI_1_io1_i : in STD_LOGIC;
-    SPI_1_io1_o : out STD_LOGIC;
-    SPI_1_io1_t : out STD_LOGIC;
-    SPI_1_ss_i : in STD_LOGIC;
-    SPI_1_ss_o : out STD_LOGIC;
-    SPI_1_ss1_o : out STD_LOGIC;
-    SPI_1_ss2_o : out STD_LOGIC;
-    SPI_1_ss_t : out STD_LOGIC;
-    UART_1_txd : out STD_LOGIC;
-    UART_1_rxd : in STD_LOGIC
+    ADC_2_v_n : in STD_LOGIC;
+    ADC_2_v_p : in STD_LOGIC;
+    ADC_0_v_n : in STD_LOGIC;
+    ADC_0_v_p : in STD_LOGIC
   );
   end component pynq_z2;
   component IOBUF is
@@ -234,7 +212,15 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_i_43 : STD_LOGIC_VECTOR ( 43 to 43 );
   signal EMIO_tri_i_44 : STD_LOGIC_VECTOR ( 44 to 44 );
   signal EMIO_tri_i_45 : STD_LOGIC_VECTOR ( 45 to 45 );
+  signal EMIO_tri_i_46 : STD_LOGIC_VECTOR ( 46 to 46 );
+  signal EMIO_tri_i_47 : STD_LOGIC_VECTOR ( 47 to 47 );
+  signal EMIO_tri_i_48 : STD_LOGIC_VECTOR ( 48 to 48 );
+  signal EMIO_tri_i_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_i_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal EMIO_tri_i_50 : STD_LOGIC_VECTOR ( 50 to 50 );
+  signal EMIO_tri_i_51 : STD_LOGIC_VECTOR ( 51 to 51 );
+  signal EMIO_tri_i_52 : STD_LOGIC_VECTOR ( 52 to 52 );
+  signal EMIO_tri_i_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_i_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_i_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_i_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -280,7 +266,15 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_io_43 : STD_LOGIC_VECTOR ( 43 to 43 );
   signal EMIO_tri_io_44 : STD_LOGIC_VECTOR ( 44 to 44 );
   signal EMIO_tri_io_45 : STD_LOGIC_VECTOR ( 45 to 45 );
+  signal EMIO_tri_io_46 : STD_LOGIC_VECTOR ( 46 to 46 );
+  signal EMIO_tri_io_47 : STD_LOGIC_VECTOR ( 47 to 47 );
+  signal EMIO_tri_io_48 : STD_LOGIC_VECTOR ( 48 to 48 );
+  signal EMIO_tri_io_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_io_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal EMIO_tri_io_50 : STD_LOGIC_VECTOR ( 50 to 50 );
+  signal EMIO_tri_io_51 : STD_LOGIC_VECTOR ( 51 to 51 );
+  signal EMIO_tri_io_52 : STD_LOGIC_VECTOR ( 52 to 52 );
+  signal EMIO_tri_io_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_io_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_io_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_io_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -326,7 +320,15 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_o_43 : STD_LOGIC_VECTOR ( 43 to 43 );
   signal EMIO_tri_o_44 : STD_LOGIC_VECTOR ( 44 to 44 );
   signal EMIO_tri_o_45 : STD_LOGIC_VECTOR ( 45 to 45 );
+  signal EMIO_tri_o_46 : STD_LOGIC_VECTOR ( 46 to 46 );
+  signal EMIO_tri_o_47 : STD_LOGIC_VECTOR ( 47 to 47 );
+  signal EMIO_tri_o_48 : STD_LOGIC_VECTOR ( 48 to 48 );
+  signal EMIO_tri_o_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_o_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal EMIO_tri_o_50 : STD_LOGIC_VECTOR ( 50 to 50 );
+  signal EMIO_tri_o_51 : STD_LOGIC_VECTOR ( 51 to 51 );
+  signal EMIO_tri_o_52 : STD_LOGIC_VECTOR ( 52 to 52 );
+  signal EMIO_tri_o_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_o_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_o_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_o_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -372,7 +374,15 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_t_43 : STD_LOGIC_VECTOR ( 43 to 43 );
   signal EMIO_tri_t_44 : STD_LOGIC_VECTOR ( 44 to 44 );
   signal EMIO_tri_t_45 : STD_LOGIC_VECTOR ( 45 to 45 );
+  signal EMIO_tri_t_46 : STD_LOGIC_VECTOR ( 46 to 46 );
+  signal EMIO_tri_t_47 : STD_LOGIC_VECTOR ( 47 to 47 );
+  signal EMIO_tri_t_48 : STD_LOGIC_VECTOR ( 48 to 48 );
+  signal EMIO_tri_t_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_t_5 : STD_LOGIC_VECTOR ( 5 to 5 );
+  signal EMIO_tri_t_50 : STD_LOGIC_VECTOR ( 50 to 50 );
+  signal EMIO_tri_t_51 : STD_LOGIC_VECTOR ( 51 to 51 );
+  signal EMIO_tri_t_52 : STD_LOGIC_VECTOR ( 52 to 52 );
+  signal EMIO_tri_t_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_t_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_t_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_t_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -389,25 +399,6 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal IIC_1_sda_i : STD_LOGIC;
   signal IIC_1_sda_o : STD_LOGIC;
   signal IIC_1_sda_t : STD_LOGIC;
-  signal SDIO_1_cmd_i : STD_LOGIC;
-  signal SDIO_1_cmd_o : STD_LOGIC;
-  signal SDIO_1_cmd_t : STD_LOGIC;
-  signal SDIO_1_data_i_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal SDIO_1_data_i_1 : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal SDIO_1_data_i_2 : STD_LOGIC_VECTOR ( 2 to 2 );
-  signal SDIO_1_data_i_3 : STD_LOGIC_VECTOR ( 3 to 3 );
-  signal SDIO_1_data_io_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal SDIO_1_data_io_1 : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal SDIO_1_data_io_2 : STD_LOGIC_VECTOR ( 2 to 2 );
-  signal SDIO_1_data_io_3 : STD_LOGIC_VECTOR ( 3 to 3 );
-  signal SDIO_1_data_o_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal SDIO_1_data_o_1 : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal SDIO_1_data_o_2 : STD_LOGIC_VECTOR ( 2 to 2 );
-  signal SDIO_1_data_o_3 : STD_LOGIC_VECTOR ( 3 to 3 );
-  signal SDIO_1_data_t_0 : STD_LOGIC_VECTOR ( 0 to 0 );
-  signal SDIO_1_data_t_1 : STD_LOGIC_VECTOR ( 1 to 1 );
-  signal SDIO_1_data_t_2 : STD_LOGIC_VECTOR ( 2 to 2 );
-  signal SDIO_1_data_t_3 : STD_LOGIC_VECTOR ( 3 to 3 );
   signal SPI_0_io0_i : STD_LOGIC;
   signal SPI_0_io0_o : STD_LOGIC;
   signal SPI_0_io0_t : STD_LOGIC;
@@ -720,12 +711,68 @@ EMIO_tri_iobuf_45: component IOBUF
       O => EMIO_tri_i_45(45),
       T => EMIO_tri_t_45(45)
     );
+EMIO_tri_iobuf_46: component IOBUF
+     port map (
+      I => EMIO_tri_o_46(46),
+      IO => EMIO_tri_io(46),
+      O => EMIO_tri_i_46(46),
+      T => EMIO_tri_t_46(46)
+    );
+EMIO_tri_iobuf_47: component IOBUF
+     port map (
+      I => EMIO_tri_o_47(47),
+      IO => EMIO_tri_io(47),
+      O => EMIO_tri_i_47(47),
+      T => EMIO_tri_t_47(47)
+    );
+EMIO_tri_iobuf_48: component IOBUF
+     port map (
+      I => EMIO_tri_o_48(48),
+      IO => EMIO_tri_io(48),
+      O => EMIO_tri_i_48(48),
+      T => EMIO_tri_t_48(48)
+    );
+EMIO_tri_iobuf_49: component IOBUF
+     port map (
+      I => EMIO_tri_o_49(49),
+      IO => EMIO_tri_io(49),
+      O => EMIO_tri_i_49(49),
+      T => EMIO_tri_t_49(49)
+    );
 EMIO_tri_iobuf_5: component IOBUF
      port map (
       I => EMIO_tri_o_5(5),
       IO => EMIO_tri_io(5),
       O => EMIO_tri_i_5(5),
       T => EMIO_tri_t_5(5)
+    );
+EMIO_tri_iobuf_50: component IOBUF
+     port map (
+      I => EMIO_tri_o_50(50),
+      IO => EMIO_tri_io(50),
+      O => EMIO_tri_i_50(50),
+      T => EMIO_tri_t_50(50)
+    );
+EMIO_tri_iobuf_51: component IOBUF
+     port map (
+      I => EMIO_tri_o_51(51),
+      IO => EMIO_tri_io(51),
+      O => EMIO_tri_i_51(51),
+      T => EMIO_tri_t_51(51)
+    );
+EMIO_tri_iobuf_52: component IOBUF
+     port map (
+      I => EMIO_tri_o_52(52),
+      IO => EMIO_tri_io(52),
+      O => EMIO_tri_i_52(52),
+      T => EMIO_tri_t_52(52)
+    );
+EMIO_tri_iobuf_53: component IOBUF
+     port map (
+      I => EMIO_tri_o_53(53),
+      IO => EMIO_tri_io(53),
+      O => EMIO_tri_i_53(53),
+      T => EMIO_tri_t_53(53)
     );
 EMIO_tri_iobuf_6: component IOBUF
      port map (
@@ -782,41 +829,6 @@ IIC_1_sda_iobuf: component IOBUF
       IO => IIC_1_sda_io,
       O => IIC_1_sda_i,
       T => IIC_1_sda_t
-    );
-SDIO_1_cmd_iobuf: component IOBUF
-     port map (
-      I => SDIO_1_cmd_o,
-      IO => SDIO_1_cmd_io,
-      O => SDIO_1_cmd_i,
-      T => SDIO_1_cmd_t
-    );
-SDIO_1_data_iobuf_0: component IOBUF
-     port map (
-      I => SDIO_1_data_o_0(0),
-      IO => SDIO_1_data_io(0),
-      O => SDIO_1_data_i_0(0),
-      T => SDIO_1_data_t_0(0)
-    );
-SDIO_1_data_iobuf_1: component IOBUF
-     port map (
-      I => SDIO_1_data_o_1(1),
-      IO => SDIO_1_data_io(1),
-      O => SDIO_1_data_i_1(1),
-      T => SDIO_1_data_t_1(1)
-    );
-SDIO_1_data_iobuf_2: component IOBUF
-     port map (
-      I => SDIO_1_data_o_2(2),
-      IO => SDIO_1_data_io(2),
-      O => SDIO_1_data_i_2(2),
-      T => SDIO_1_data_t_2(2)
-    );
-SDIO_1_data_iobuf_3: component IOBUF
-     port map (
-      I => SDIO_1_data_o_3(3),
-      IO => SDIO_1_data_io(3),
-      O => SDIO_1_data_i_3(3),
-      T => SDIO_1_data_t_3(3)
     );
 SPI_0_io0_iobuf: component IOBUF
      port map (
@@ -903,6 +915,14 @@ pynq_z2_i: component pynq_z2
       DDR_ras_n => DDR_ras_n,
       DDR_reset_n => DDR_reset_n,
       DDR_we_n => DDR_we_n,
+      EMIO_tri_i(53) => EMIO_tri_i_53(53),
+      EMIO_tri_i(52) => EMIO_tri_i_52(52),
+      EMIO_tri_i(51) => EMIO_tri_i_51(51),
+      EMIO_tri_i(50) => EMIO_tri_i_50(50),
+      EMIO_tri_i(49) => EMIO_tri_i_49(49),
+      EMIO_tri_i(48) => EMIO_tri_i_48(48),
+      EMIO_tri_i(47) => EMIO_tri_i_47(47),
+      EMIO_tri_i(46) => EMIO_tri_i_46(46),
       EMIO_tri_i(45) => EMIO_tri_i_45(45),
       EMIO_tri_i(44) => EMIO_tri_i_44(44),
       EMIO_tri_i(43) => EMIO_tri_i_43(43),
@@ -949,6 +969,14 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_i(2) => EMIO_tri_i_2(2),
       EMIO_tri_i(1) => EMIO_tri_i_1(1),
       EMIO_tri_i(0) => EMIO_tri_i_0(0),
+      EMIO_tri_o(53) => EMIO_tri_o_53(53),
+      EMIO_tri_o(52) => EMIO_tri_o_52(52),
+      EMIO_tri_o(51) => EMIO_tri_o_51(51),
+      EMIO_tri_o(50) => EMIO_tri_o_50(50),
+      EMIO_tri_o(49) => EMIO_tri_o_49(49),
+      EMIO_tri_o(48) => EMIO_tri_o_48(48),
+      EMIO_tri_o(47) => EMIO_tri_o_47(47),
+      EMIO_tri_o(46) => EMIO_tri_o_46(46),
       EMIO_tri_o(45) => EMIO_tri_o_45(45),
       EMIO_tri_o(44) => EMIO_tri_o_44(44),
       EMIO_tri_o(43) => EMIO_tri_o_43(43),
@@ -995,6 +1023,14 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_o(2) => EMIO_tri_o_2(2),
       EMIO_tri_o(1) => EMIO_tri_o_1(1),
       EMIO_tri_o(0) => EMIO_tri_o_0(0),
+      EMIO_tri_t(53) => EMIO_tri_t_53(53),
+      EMIO_tri_t(52) => EMIO_tri_t_52(52),
+      EMIO_tri_t(51) => EMIO_tri_t_51(51),
+      EMIO_tri_t(50) => EMIO_tri_t_50(50),
+      EMIO_tri_t(49) => EMIO_tri_t_49(49),
+      EMIO_tri_t(48) => EMIO_tri_t_48(48),
+      EMIO_tri_t(47) => EMIO_tri_t_47(47),
+      EMIO_tri_t(46) => EMIO_tri_t_46(46),
       EMIO_tri_t(45) => EMIO_tri_t_45(45),
       EMIO_tri_t(44) => EMIO_tri_t_44(44),
       EMIO_tri_t(43) => EMIO_tri_t_43(43),
@@ -1065,28 +1101,6 @@ pynq_z2_i: component pynq_z2
       PWM_3 => PWM_3,
       PWM_4 => PWM_4,
       PWM_5 => PWM_5,
---      SDIO_1_buspow => SDIO_1_buspow,
---      SDIO_1_busvolt(2 downto 0) => SDIO_1_busvolt(2 downto 0),
-      SDIO_1_cdn => SDIO_1_cdn,
-      SDIO_1_clk => SDIO_1_clk,
---      SDIO_1_clk_fb => SDIO_1_clk_fb,
-      SDIO_1_cmd_i => SDIO_1_cmd_i,
-      SDIO_1_cmd_o => SDIO_1_cmd_o,
-      SDIO_1_cmd_t => SDIO_1_cmd_t,
-      SDIO_1_data_i(3) => SDIO_1_data_i_3(3),
-      SDIO_1_data_i(2) => SDIO_1_data_i_2(2),
-      SDIO_1_data_i(1) => SDIO_1_data_i_1(1),
-      SDIO_1_data_i(0) => SDIO_1_data_i_0(0),
-      SDIO_1_data_o(3) => SDIO_1_data_o_3(3),
-      SDIO_1_data_o(2) => SDIO_1_data_o_2(2),
-      SDIO_1_data_o(1) => SDIO_1_data_o_1(1),
-      SDIO_1_data_o(0) => SDIO_1_data_o_0(0),
-      SDIO_1_data_t(3) => SDIO_1_data_t_3(3),
-      SDIO_1_data_t(2) => SDIO_1_data_t_2(2),
-      SDIO_1_data_t(1) => SDIO_1_data_t_1(1),
-      SDIO_1_data_t(0) => SDIO_1_data_t_0(0),
---      SDIO_1_led => SDIO_1_led,
-      SDIO_1_wp => SDIO_1_wp,
       SPI_0_io0_i => SPI_0_io0_i,
       SPI_0_io0_o => SPI_0_io0_o,
       SPI_0_io0_t => SPI_0_io0_t,

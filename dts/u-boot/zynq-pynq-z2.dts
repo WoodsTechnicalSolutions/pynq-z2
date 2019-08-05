@@ -16,7 +16,6 @@
 		serial0 = &uart0;
 		spi0 = &qspi;
 		mmc0 = &sdhci0;
-		mmc1 = &sdhci1;
 	};
 
 	usb_phy0: phy0 {
@@ -41,11 +40,6 @@
 };
 
 &sdhci0 {
-	u-boot,dm-pre-reloc;
-	status = "okay";
-};
-
-&sdhci1 {
 	u-boot,dm-pre-reloc;
 	status = "okay";
 };
