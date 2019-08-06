@@ -37,7 +37,10 @@ endif
 		printf "***** DEVICETREE GENERATION FAILED *****\n"; \
 		exit 2; \
 	fi
-	@cp -av sdk/pcw.dtsi sdk/pl.dtsi sdk/system.dts sdk/system-top.dts dts/
+	tail -n +7 sdk/pcw.dtsi > dts/pcw.dtsi
+	tail -n +7 sdk/pl.dtsi > dts/pl.dtsi
+	tail -n +7 sdk/system.dts > dts/system.dts
+	tail -n +7 sdk/system-top.dts > dts/system-top.dts
 
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
