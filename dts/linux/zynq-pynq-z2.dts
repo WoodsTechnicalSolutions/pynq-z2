@@ -1,6 +1,8 @@
 /dts-v1/;
 
 #include "system-top.dts"
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/gpio/gpio.h>
 
 / {
 	model = "Zynq PYNQ-Z2 Development Board";
@@ -27,6 +29,84 @@
                 view-port = <0x170>;
                 drv-vbus;
         };
+
+	gpio-leds {
+		compatible = "gpio-leds";
+		led4_b {
+			label = "LED4_B";
+			gpios = <&gpio0 56 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led4_g {
+			label = "LED4_G";
+			gpios = <&gpio0 57 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led4_r {
+			label = "LED4_R";
+			gpios = <&gpio0 58 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led5_b {
+			label = "LED5_B";
+			gpios = <&gpio0 59 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led5_g {
+			label = "LED5_G";
+			gpios = <&gpio0 60 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led5_r {
+			label = "LED5_R";
+			gpios = <&gpio0 61 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led0 {
+			label = "LED0";
+			gpios = <&gpio0 62 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "heartbeat";
+		};
+		led1 {
+			label = "LED1";
+			gpios = <&gpio0 63 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "mmc0";
+		};
+		led2 {
+			label = "LED2";
+			gpios = <&gpio0 64 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+		led3 {
+			label = "LED3";
+			gpios = <&gpio0 65 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+		};
+	};
+
+	gpio-keys {
+		compatible = "gpio-keys";
+		btn0 {
+			label = "BTN0";
+			linux,code = <BTN_TRIGGER_HAPPY1>; // Key Code 2c0
+			gpios = <&gpio0 66 GPIO_ACTIVE_LOW>;
+		};
+		btn1 {
+			label = "BTN1";
+			linux,code = <BTN_TRIGGER_HAPPY2>; // Key Code 2c1
+			gpios = <&gpio0 67 GPIO_ACTIVE_LOW>;
+		};
+		btn2 {
+			label = "BTN2";
+			linux,code = <BTN_TRIGGER_HAPPY3>; // Key Code 2c2
+			gpios = <&gpio0 68 GPIO_ACTIVE_LOW>;
+		};
+		btn3 {
+			label = "BTN3";
+			linux,code = <BTN_TRIGGER_HAPPY4>; // Key Code 2c3
+			gpios = <&gpio0 69 GPIO_ACTIVE_LOW>;
+		};
+	};
 };
 
 &usb0 {
