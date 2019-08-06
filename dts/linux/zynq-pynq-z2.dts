@@ -150,3 +150,29 @@
 		"gpio112_NC", "gpio113_NC", "gpio114_NC", "gpio115_NC",
 		"gpio116_NC", "gpio117_NC";
 };
+
+&pl_xadc {
+	status = "okay";
+	xlnx,channels {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		vaux1@2 { /* A0 */
+			reg = <2>;
+		};
+		vaux5@6 { /* A4 */
+			reg = <6>;
+		};
+		vaux6@7 { /* A2 */
+			reg = <7>;
+		};
+		vaux9@10 { /* A1 */
+			reg = <10>;
+		};
+		vaux13@14 { /* A5 */
+			reg = <14>;
+		};
+		vaux15@16 { /* A3 */
+			reg = <16>;
+		};
+	};
+};
