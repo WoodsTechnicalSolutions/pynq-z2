@@ -33,3 +33,40 @@
 	dr_mode = "host";
         usb-phy = <&usb_phy0>;
 };
+
+/* PYNQ-Z2 GPIO Schematic Symbols (see also fpga/sdk/ps7_init.html)
+ * Where 'gpioX_NC', means GPIO X is Not Connected.
+ */
+&gpio0 {
+	gpio-line-names =
+		"gpio0_NC", "SPI_CS", "SPI_DQ0", "SPI_DQ1",
+		"SPI_DQ2", "SPI_DQ3", "SPI_SCK", "VCFG0",
+		"SPI_SCLK_FB", "ETH_RST_B", "ETH_INT_B", "OTG_OC",
+		"AR_RST", "gpio13_NC", "UART_TXD_IN(rx)", "UART_RXD_OUT(tx)",
+		"ETH_TXCK", "ETH_TXD0", "ETH_TXD1", "ETH_TXD2",
+		"ETH_TXD3", "ETH_TXCTL", "ETH_RXCK", "ETH_RXD0",
+		"ETH_RXD1", "ETH_RXD2", "ETH_RXD3", "ETH_RXCTL",
+		"OTG_DATA4", "OTG_DIR", "OTG_STP", "OTG_NXT",
+		"OTG_DATA0", "OTG_DATA1", "OTG_DATA2", "OTG_DATA3",
+		"OTG_CLK", "OTG_DATA5", "OTG_DATA6", "OTG_DATA7",
+		"SD_CCLK", "SD_CMD", "SD_D0", "SD_D1",
+		"SD_D2", "SD_D3", "OTG_RESETN", "SD_CD",
+		"gpio48_NC", "gpio49_NC", "HDMI_TX_SCL", "HDMI_TX_SDA",
+		"ETH_MDC", "ETH_MDIO", "SW0", "SW1",
+		"LED4_B", "LED4_G", "LED4_R", "LED5_B",
+		"LED5_G", "LED5_R", "LD0", "LD1",
+		"LD2", "LD3", "BTN0", "BTN1",
+		"BTN2", "BTN3", "PMODB_7", "PMODB_8",
+		"PMODB_9", "PMODB_10", "AR6", "AR7",
+		"AR8", "AR9", "AR10", "AR11",
+		"AR12", "AR13", "A", "RPIO_08_R",
+		"RPIO_09_R", "RPIO_10_R", "RPIO_11_R", "RPIO_12_R",
+		"RPIO_13_R", "RPIO_14_R", "RPIO_15_R", "RPIO_16_R",
+		"RPIO_17_R", "RPIO_18_R", "RPIO_19_R", "RPIO_20_R",
+		"RPIO_21_R", "RPIO_22_R", "RPIO_23_R", "RPIO_24_R",
+		"RPIO_25_R", "RPIO_26_R", "gpio102_NC", "gpio103_NC",
+		"gpio104_NC", "gpio105_NC", "gpio106_NC", "gpio107_NC",
+		"gpio108_NC", "gpio109_NC", "gpio110_NC", "gpio111_NC",
+		"gpio112_NC", "gpio113_NC", "gpio114_NC", "gpio115_NC",
+		"gpio116_NC", "gpio117_NC";
+};

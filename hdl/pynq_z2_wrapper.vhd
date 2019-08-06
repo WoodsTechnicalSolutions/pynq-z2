@@ -40,7 +40,7 @@ entity pynq_z2_wrapper is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
-    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 53 downto 0 );
+    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 47 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -85,9 +85,9 @@ architecture STRUCTURE of pynq_z2_wrapper is
     PWM_5 : out STD_LOGIC;
     UART_1_txd : out STD_LOGIC;
     UART_1_rxd : in STD_LOGIC;
-    EMIO_tri_i : in STD_LOGIC_VECTOR ( 53 downto 0 );
-    EMIO_tri_o : out STD_LOGIC_VECTOR ( 53 downto 0 );
-    EMIO_tri_t : out STD_LOGIC_VECTOR ( 53 downto 0 );
+    EMIO_tri_i : in STD_LOGIC_VECTOR ( 47 downto 0 );
+    EMIO_tri_o : out STD_LOGIC_VECTOR ( 47 downto 0 );
+    EMIO_tri_t : out STD_LOGIC_VECTOR ( 47 downto 0 );
     SPI_1_sck_i : in STD_LOGIC;
     SPI_1_sck_o : out STD_LOGIC;
     SPI_1_sck_t : out STD_LOGIC;
@@ -214,13 +214,7 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_i_45 : STD_LOGIC_VECTOR ( 45 to 45 );
   signal EMIO_tri_i_46 : STD_LOGIC_VECTOR ( 46 to 46 );
   signal EMIO_tri_i_47 : STD_LOGIC_VECTOR ( 47 to 47 );
-  signal EMIO_tri_i_48 : STD_LOGIC_VECTOR ( 48 to 48 );
-  signal EMIO_tri_i_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_i_5 : STD_LOGIC_VECTOR ( 5 to 5 );
-  signal EMIO_tri_i_50 : STD_LOGIC_VECTOR ( 50 to 50 );
-  signal EMIO_tri_i_51 : STD_LOGIC_VECTOR ( 51 to 51 );
-  signal EMIO_tri_i_52 : STD_LOGIC_VECTOR ( 52 to 52 );
-  signal EMIO_tri_i_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_i_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_i_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_i_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -268,13 +262,7 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_io_45 : STD_LOGIC_VECTOR ( 45 to 45 );
   signal EMIO_tri_io_46 : STD_LOGIC_VECTOR ( 46 to 46 );
   signal EMIO_tri_io_47 : STD_LOGIC_VECTOR ( 47 to 47 );
-  signal EMIO_tri_io_48 : STD_LOGIC_VECTOR ( 48 to 48 );
-  signal EMIO_tri_io_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_io_5 : STD_LOGIC_VECTOR ( 5 to 5 );
-  signal EMIO_tri_io_50 : STD_LOGIC_VECTOR ( 50 to 50 );
-  signal EMIO_tri_io_51 : STD_LOGIC_VECTOR ( 51 to 51 );
-  signal EMIO_tri_io_52 : STD_LOGIC_VECTOR ( 52 to 52 );
-  signal EMIO_tri_io_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_io_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_io_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_io_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -322,13 +310,7 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_o_45 : STD_LOGIC_VECTOR ( 45 to 45 );
   signal EMIO_tri_o_46 : STD_LOGIC_VECTOR ( 46 to 46 );
   signal EMIO_tri_o_47 : STD_LOGIC_VECTOR ( 47 to 47 );
-  signal EMIO_tri_o_48 : STD_LOGIC_VECTOR ( 48 to 48 );
-  signal EMIO_tri_o_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_o_5 : STD_LOGIC_VECTOR ( 5 to 5 );
-  signal EMIO_tri_o_50 : STD_LOGIC_VECTOR ( 50 to 50 );
-  signal EMIO_tri_o_51 : STD_LOGIC_VECTOR ( 51 to 51 );
-  signal EMIO_tri_o_52 : STD_LOGIC_VECTOR ( 52 to 52 );
-  signal EMIO_tri_o_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_o_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_o_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_o_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -376,13 +358,7 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_t_45 : STD_LOGIC_VECTOR ( 45 to 45 );
   signal EMIO_tri_t_46 : STD_LOGIC_VECTOR ( 46 to 46 );
   signal EMIO_tri_t_47 : STD_LOGIC_VECTOR ( 47 to 47 );
-  signal EMIO_tri_t_48 : STD_LOGIC_VECTOR ( 48 to 48 );
-  signal EMIO_tri_t_49 : STD_LOGIC_VECTOR ( 49 to 49 );
   signal EMIO_tri_t_5 : STD_LOGIC_VECTOR ( 5 to 5 );
-  signal EMIO_tri_t_50 : STD_LOGIC_VECTOR ( 50 to 50 );
-  signal EMIO_tri_t_51 : STD_LOGIC_VECTOR ( 51 to 51 );
-  signal EMIO_tri_t_52 : STD_LOGIC_VECTOR ( 52 to 52 );
-  signal EMIO_tri_t_53 : STD_LOGIC_VECTOR ( 53 to 53 );
   signal EMIO_tri_t_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_t_7 : STD_LOGIC_VECTOR ( 7 to 7 );
   signal EMIO_tri_t_8 : STD_LOGIC_VECTOR ( 8 to 8 );
@@ -725,54 +701,12 @@ EMIO_tri_iobuf_47: component IOBUF
       O => EMIO_tri_i_47(47),
       T => EMIO_tri_t_47(47)
     );
-EMIO_tri_iobuf_48: component IOBUF
-     port map (
-      I => EMIO_tri_o_48(48),
-      IO => EMIO_tri_io(48),
-      O => EMIO_tri_i_48(48),
-      T => EMIO_tri_t_48(48)
-    );
-EMIO_tri_iobuf_49: component IOBUF
-     port map (
-      I => EMIO_tri_o_49(49),
-      IO => EMIO_tri_io(49),
-      O => EMIO_tri_i_49(49),
-      T => EMIO_tri_t_49(49)
-    );
 EMIO_tri_iobuf_5: component IOBUF
      port map (
       I => EMIO_tri_o_5(5),
       IO => EMIO_tri_io(5),
       O => EMIO_tri_i_5(5),
       T => EMIO_tri_t_5(5)
-    );
-EMIO_tri_iobuf_50: component IOBUF
-     port map (
-      I => EMIO_tri_o_50(50),
-      IO => EMIO_tri_io(50),
-      O => EMIO_tri_i_50(50),
-      T => EMIO_tri_t_50(50)
-    );
-EMIO_tri_iobuf_51: component IOBUF
-     port map (
-      I => EMIO_tri_o_51(51),
-      IO => EMIO_tri_io(51),
-      O => EMIO_tri_i_51(51),
-      T => EMIO_tri_t_51(51)
-    );
-EMIO_tri_iobuf_52: component IOBUF
-     port map (
-      I => EMIO_tri_o_52(52),
-      IO => EMIO_tri_io(52),
-      O => EMIO_tri_i_52(52),
-      T => EMIO_tri_t_52(52)
-    );
-EMIO_tri_iobuf_53: component IOBUF
-     port map (
-      I => EMIO_tri_o_53(53),
-      IO => EMIO_tri_io(53),
-      O => EMIO_tri_i_53(53),
-      T => EMIO_tri_t_53(53)
     );
 EMIO_tri_iobuf_6: component IOBUF
      port map (
@@ -915,12 +849,6 @@ pynq_z2_i: component pynq_z2
       DDR_ras_n => DDR_ras_n,
       DDR_reset_n => DDR_reset_n,
       DDR_we_n => DDR_we_n,
-      EMIO_tri_i(53) => EMIO_tri_i_53(53),
-      EMIO_tri_i(52) => EMIO_tri_i_52(52),
-      EMIO_tri_i(51) => EMIO_tri_i_51(51),
-      EMIO_tri_i(50) => EMIO_tri_i_50(50),
-      EMIO_tri_i(49) => EMIO_tri_i_49(49),
-      EMIO_tri_i(48) => EMIO_tri_i_48(48),
       EMIO_tri_i(47) => EMIO_tri_i_47(47),
       EMIO_tri_i(46) => EMIO_tri_i_46(46),
       EMIO_tri_i(45) => EMIO_tri_i_45(45),
@@ -969,12 +897,6 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_i(2) => EMIO_tri_i_2(2),
       EMIO_tri_i(1) => EMIO_tri_i_1(1),
       EMIO_tri_i(0) => EMIO_tri_i_0(0),
-      EMIO_tri_o(53) => EMIO_tri_o_53(53),
-      EMIO_tri_o(52) => EMIO_tri_o_52(52),
-      EMIO_tri_o(51) => EMIO_tri_o_51(51),
-      EMIO_tri_o(50) => EMIO_tri_o_50(50),
-      EMIO_tri_o(49) => EMIO_tri_o_49(49),
-      EMIO_tri_o(48) => EMIO_tri_o_48(48),
       EMIO_tri_o(47) => EMIO_tri_o_47(47),
       EMIO_tri_o(46) => EMIO_tri_o_46(46),
       EMIO_tri_o(45) => EMIO_tri_o_45(45),
@@ -1023,12 +945,6 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_o(2) => EMIO_tri_o_2(2),
       EMIO_tri_o(1) => EMIO_tri_o_1(1),
       EMIO_tri_o(0) => EMIO_tri_o_0(0),
-      EMIO_tri_t(53) => EMIO_tri_t_53(53),
-      EMIO_tri_t(52) => EMIO_tri_t_52(52),
-      EMIO_tri_t(51) => EMIO_tri_t_51(51),
-      EMIO_tri_t(50) => EMIO_tri_t_50(50),
-      EMIO_tri_t(49) => EMIO_tri_t_49(49),
-      EMIO_tri_t(48) => EMIO_tri_t_48(48),
       EMIO_tri_t(47) => EMIO_tri_t_47(47),
       EMIO_tri_t(46) => EMIO_tri_t_46(46),
       EMIO_tri_t(45) => EMIO_tri_t_45(45),
