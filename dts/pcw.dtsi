@@ -13,7 +13,7 @@
 	xlnx,ptp-enet-clock = <0x6750918>;
 };
 &gpio0 {
-	emio-gpio-width = <48>;
+	emio-gpio-width = <42>;
 	gpio-mask-high = <0x0>;
 	gpio-mask-low = <0x5600>;
 };

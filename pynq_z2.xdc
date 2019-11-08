@@ -153,12 +153,12 @@ set_property -dict { PACKAGE_PIN U7    IOSTANDARD LVCMOS33 } [get_ports { EMIO_t
 set_property -dict { PACKAGE_PIN C20   IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[39] }]; #IO_L1P_T0_AD0P_35       Sch=rpio_18_r
 set_property -dict { PACKAGE_PIN Y8    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[40] }]; #IO_L14N_T2_SRCC_13      Sch=rpio_19_r
 set_property -dict { PACKAGE_PIN A20   IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[41] }]; #IO_L2N_T0_AD8N_35       Sch=rpio_20_r
-set_property -dict { PACKAGE_PIN Y9    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[42] }]; #IO_L14P_T2_SRCC_13      Sch=rpio_21_r
-set_property -dict { PACKAGE_PIN U8    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[43] }]; #IO_L17N_T2_13           Sch=rpio_22_r
-set_property -dict { PACKAGE_PIN W6    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[44] }]; #IO_IO_L22N_T3_13        Sch=rpio_23_r
-set_property -dict { PACKAGE_PIN Y7    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[45] }]; #IO_L13P_T2_MRCC_13      Sch=rpio_24_r
-set_property -dict { PACKAGE_PIN F20   IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[46] }]; #IO_L15N_T2_DQS_AD12N_35 Sch=rpio_25_r
-set_property -dict { PACKAGE_PIN W9    IOSTANDARD LVCMOS33 } [get_ports { EMIO_tri_io[47] }]; #IO_L16N_T2_13           Sch=rpio_26_r
+set_property -dict { PACKAGE_PIN Y9    IOSTANDARD LVCMOS33 } [get_ports { TIMER_PWM       }]; #IO_L14P_T2_SRCC_13      Sch=rpio_21_r
+set_property -dict { PACKAGE_PIN U8    IOSTANDARD LVCMOS33 } [get_ports { TIMER_OUT_0     }]; #IO_L17N_T2_13           Sch=rpio_22_r
+set_property -dict { PACKAGE_PIN W6    IOSTANDARD LVCMOS33 } [get_ports { TIMER_OUT_1     }]; #IO_IO_L22N_T3_13        Sch=rpio_23_r
+set_property -dict { PACKAGE_PIN Y7    IOSTANDARD LVCMOS33 } [get_ports { TIMER_IN_0      }]; #IO_L13P_T2_MRCC_13      Sch=rpio_24_r
+set_property -dict { PACKAGE_PIN F20   IOSTANDARD LVCMOS33 } [get_ports { TIMER_IN_1      }]; #IO_L15N_T2_DQS_AD12N_35 Sch=rpio_25_r
+set_property -dict { PACKAGE_PIN W9    IOSTANDARD LVCMOS33 } [get_ports { TIMER_FREEZE    }]; #IO_L16N_T2_13           Sch=rpio_26_r
 #set_property -dict { PACKAGE_PIN Y16   IOSTANDARD LVCMOS33 } [get_ports { rpio_sd_r }]; #IO_L7P_T1_34                  Sch=rpio_sd_r
 #set_property -dict { PACKAGE_PIN Y17   IOSTANDARD LVCMOS33 } [get_ports { rpio_sc_r }]; #IO_L7N_T1_34                  Sch=rpio_sc_r
 

@@ -1,7 +1,7 @@
 --Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2019.1 (lin64) Build 2552052 Fri May 24 14:47:09 MDT 2019
---Date        : Sun Aug  4 22:36:30 2019
+--Tool Version: Vivado v.2019.2 (lin64) Build 2700185 Thu Oct 24 18:45:48 MDT 2019
+--Date        : Thu Nov  7 19:21:44 2019
 --Host        : hostname running 64-bit Arch Linux
 --Command     : generate_target pynq_z2_wrapper.bd
 --Design      : pynq_z2_wrapper
@@ -40,7 +40,7 @@ entity pynq_z2_wrapper is
     DDR_ras_n : inout STD_LOGIC;
     DDR_reset_n : inout STD_LOGIC;
     DDR_we_n : inout STD_LOGIC;
-    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 47 downto 0 );
+    EMIO_tri_io : inout STD_LOGIC_VECTOR ( 41 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
@@ -69,6 +69,12 @@ entity pynq_z2_wrapper is
     SPI_1_ss1_o : out STD_LOGIC;
     SPI_1_ss2_o : out STD_LOGIC;
     SPI_1_ss_io : inout STD_LOGIC;
+    TIMER_FREEZE : in STD_LOGIC;
+    TIMER_IN_0 : in STD_LOGIC;
+    TIMER_IN_1 : in STD_LOGIC;
+    TIMER_OUT_0 : out STD_LOGIC;
+    TIMER_OUT_1 : out STD_LOGIC;
+    TIMER_PWM : out STD_LOGIC;
     UART_1_rxd : in STD_LOGIC;
     UART_1_txd : out STD_LOGIC
   );
@@ -83,11 +89,18 @@ architecture STRUCTURE of pynq_z2_wrapper is
     PWM_3 : out STD_LOGIC;
     PWM_4 : out STD_LOGIC;
     PWM_5 : out STD_LOGIC;
+    TIMER_FREEZE : in STD_LOGIC;
+    TIMER_IN_0 : in STD_LOGIC;
+    TIMER_IN_1 : in STD_LOGIC;
+    TIMER_OUT_0 : out STD_LOGIC;
+    TIMER_OUT_1 : out STD_LOGIC;
+    TIMER_PWM : out STD_LOGIC;
+    ADC_3_v_n : in STD_LOGIC;
+    ADC_3_v_p : in STD_LOGIC;
+    ADC_5_v_n : in STD_LOGIC;
+    ADC_5_v_p : in STD_LOGIC;
     UART_1_txd : out STD_LOGIC;
     UART_1_rxd : in STD_LOGIC;
-    EMIO_tri_i : in STD_LOGIC_VECTOR ( 47 downto 0 );
-    EMIO_tri_o : out STD_LOGIC_VECTOR ( 47 downto 0 );
-    EMIO_tri_t : out STD_LOGIC_VECTOR ( 47 downto 0 );
     SPI_1_sck_i : in STD_LOGIC;
     SPI_1_sck_o : out STD_LOGIC;
     SPI_1_sck_t : out STD_LOGIC;
@@ -116,30 +129,27 @@ architecture STRUCTURE of pynq_z2_wrapper is
     SPI_0_ss1_o : out STD_LOGIC;
     SPI_0_ss2_o : out STD_LOGIC;
     SPI_0_ss_t : out STD_LOGIC;
-    FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
-    FIXED_IO_ddr_vrn : inout STD_LOGIC;
-    FIXED_IO_ddr_vrp : inout STD_LOGIC;
-    FIXED_IO_ps_srstb : inout STD_LOGIC;
-    FIXED_IO_ps_clk : inout STD_LOGIC;
-    FIXED_IO_ps_porb : inout STD_LOGIC;
-    IIC_0_sda_i : in STD_LOGIC;
-    IIC_0_sda_o : out STD_LOGIC;
-    IIC_0_sda_t : out STD_LOGIC;
-    IIC_0_scl_i : in STD_LOGIC;
-    IIC_0_scl_o : out STD_LOGIC;
-    IIC_0_scl_t : out STD_LOGIC;
     IIC_1_sda_i : in STD_LOGIC;
     IIC_1_sda_o : out STD_LOGIC;
     IIC_1_sda_t : out STD_LOGIC;
     IIC_1_scl_i : in STD_LOGIC;
     IIC_1_scl_o : out STD_LOGIC;
     IIC_1_scl_t : out STD_LOGIC;
-    ADC_3_v_n : in STD_LOGIC;
-    ADC_3_v_p : in STD_LOGIC;
-    ADC_1_v_n : in STD_LOGIC;
-    ADC_1_v_p : in STD_LOGIC;
-    ADC_5_v_n : in STD_LOGIC;
-    ADC_5_v_p : in STD_LOGIC;
+    IIC_0_sda_i : in STD_LOGIC;
+    IIC_0_sda_o : out STD_LOGIC;
+    IIC_0_sda_t : out STD_LOGIC;
+    IIC_0_scl_i : in STD_LOGIC;
+    IIC_0_scl_o : out STD_LOGIC;
+    IIC_0_scl_t : out STD_LOGIC;
+    EMIO_tri_i : in STD_LOGIC_VECTOR ( 41 downto 0 );
+    EMIO_tri_o : out STD_LOGIC_VECTOR ( 41 downto 0 );
+    EMIO_tri_t : out STD_LOGIC_VECTOR ( 41 downto 0 );
+    FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
+    FIXED_IO_ddr_vrn : inout STD_LOGIC;
+    FIXED_IO_ddr_vrp : inout STD_LOGIC;
+    FIXED_IO_ps_srstb : inout STD_LOGIC;
+    FIXED_IO_ps_clk : inout STD_LOGIC;
+    FIXED_IO_ps_porb : inout STD_LOGIC;
     DDR_cas_n : inout STD_LOGIC;
     DDR_cke : inout STD_LOGIC;
     DDR_ck_n : inout STD_LOGIC;
@@ -155,12 +165,14 @@ architecture STRUCTURE of pynq_z2_wrapper is
     DDR_dq : inout STD_LOGIC_VECTOR ( 31 downto 0 );
     DDR_dqs_n : inout STD_LOGIC_VECTOR ( 3 downto 0 );
     DDR_dqs_p : inout STD_LOGIC_VECTOR ( 3 downto 0 );
+    ADC_0_v_n : in STD_LOGIC;
+    ADC_0_v_p : in STD_LOGIC;
+    ADC_1_v_n : in STD_LOGIC;
+    ADC_1_v_p : in STD_LOGIC;
     ADC_4_v_n : in STD_LOGIC;
     ADC_4_v_p : in STD_LOGIC;
     ADC_2_v_n : in STD_LOGIC;
-    ADC_2_v_p : in STD_LOGIC;
-    ADC_0_v_n : in STD_LOGIC;
-    ADC_0_v_p : in STD_LOGIC
+    ADC_2_v_p : in STD_LOGIC
   );
   end component pynq_z2;
   component IOBUF is
@@ -208,12 +220,6 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_i_4 : STD_LOGIC_VECTOR ( 4 to 4 );
   signal EMIO_tri_i_40 : STD_LOGIC_VECTOR ( 40 to 40 );
   signal EMIO_tri_i_41 : STD_LOGIC_VECTOR ( 41 to 41 );
-  signal EMIO_tri_i_42 : STD_LOGIC_VECTOR ( 42 to 42 );
-  signal EMIO_tri_i_43 : STD_LOGIC_VECTOR ( 43 to 43 );
-  signal EMIO_tri_i_44 : STD_LOGIC_VECTOR ( 44 to 44 );
-  signal EMIO_tri_i_45 : STD_LOGIC_VECTOR ( 45 to 45 );
-  signal EMIO_tri_i_46 : STD_LOGIC_VECTOR ( 46 to 46 );
-  signal EMIO_tri_i_47 : STD_LOGIC_VECTOR ( 47 to 47 );
   signal EMIO_tri_i_5 : STD_LOGIC_VECTOR ( 5 to 5 );
   signal EMIO_tri_i_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_i_7 : STD_LOGIC_VECTOR ( 7 to 7 );
@@ -256,12 +262,6 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_io_4 : STD_LOGIC_VECTOR ( 4 to 4 );
   signal EMIO_tri_io_40 : STD_LOGIC_VECTOR ( 40 to 40 );
   signal EMIO_tri_io_41 : STD_LOGIC_VECTOR ( 41 to 41 );
-  signal EMIO_tri_io_42 : STD_LOGIC_VECTOR ( 42 to 42 );
-  signal EMIO_tri_io_43 : STD_LOGIC_VECTOR ( 43 to 43 );
-  signal EMIO_tri_io_44 : STD_LOGIC_VECTOR ( 44 to 44 );
-  signal EMIO_tri_io_45 : STD_LOGIC_VECTOR ( 45 to 45 );
-  signal EMIO_tri_io_46 : STD_LOGIC_VECTOR ( 46 to 46 );
-  signal EMIO_tri_io_47 : STD_LOGIC_VECTOR ( 47 to 47 );
   signal EMIO_tri_io_5 : STD_LOGIC_VECTOR ( 5 to 5 );
   signal EMIO_tri_io_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_io_7 : STD_LOGIC_VECTOR ( 7 to 7 );
@@ -304,12 +304,6 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_o_4 : STD_LOGIC_VECTOR ( 4 to 4 );
   signal EMIO_tri_o_40 : STD_LOGIC_VECTOR ( 40 to 40 );
   signal EMIO_tri_o_41 : STD_LOGIC_VECTOR ( 41 to 41 );
-  signal EMIO_tri_o_42 : STD_LOGIC_VECTOR ( 42 to 42 );
-  signal EMIO_tri_o_43 : STD_LOGIC_VECTOR ( 43 to 43 );
-  signal EMIO_tri_o_44 : STD_LOGIC_VECTOR ( 44 to 44 );
-  signal EMIO_tri_o_45 : STD_LOGIC_VECTOR ( 45 to 45 );
-  signal EMIO_tri_o_46 : STD_LOGIC_VECTOR ( 46 to 46 );
-  signal EMIO_tri_o_47 : STD_LOGIC_VECTOR ( 47 to 47 );
   signal EMIO_tri_o_5 : STD_LOGIC_VECTOR ( 5 to 5 );
   signal EMIO_tri_o_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_o_7 : STD_LOGIC_VECTOR ( 7 to 7 );
@@ -352,12 +346,6 @@ architecture STRUCTURE of pynq_z2_wrapper is
   signal EMIO_tri_t_4 : STD_LOGIC_VECTOR ( 4 to 4 );
   signal EMIO_tri_t_40 : STD_LOGIC_VECTOR ( 40 to 40 );
   signal EMIO_tri_t_41 : STD_LOGIC_VECTOR ( 41 to 41 );
-  signal EMIO_tri_t_42 : STD_LOGIC_VECTOR ( 42 to 42 );
-  signal EMIO_tri_t_43 : STD_LOGIC_VECTOR ( 43 to 43 );
-  signal EMIO_tri_t_44 : STD_LOGIC_VECTOR ( 44 to 44 );
-  signal EMIO_tri_t_45 : STD_LOGIC_VECTOR ( 45 to 45 );
-  signal EMIO_tri_t_46 : STD_LOGIC_VECTOR ( 46 to 46 );
-  signal EMIO_tri_t_47 : STD_LOGIC_VECTOR ( 47 to 47 );
   signal EMIO_tri_t_5 : STD_LOGIC_VECTOR ( 5 to 5 );
   signal EMIO_tri_t_6 : STD_LOGIC_VECTOR ( 6 to 6 );
   signal EMIO_tri_t_7 : STD_LOGIC_VECTOR ( 7 to 7 );
@@ -659,48 +647,6 @@ EMIO_tri_iobuf_41: component IOBUF
       O => EMIO_tri_i_41(41),
       T => EMIO_tri_t_41(41)
     );
-EMIO_tri_iobuf_42: component IOBUF
-     port map (
-      I => EMIO_tri_o_42(42),
-      IO => EMIO_tri_io(42),
-      O => EMIO_tri_i_42(42),
-      T => EMIO_tri_t_42(42)
-    );
-EMIO_tri_iobuf_43: component IOBUF
-     port map (
-      I => EMIO_tri_o_43(43),
-      IO => EMIO_tri_io(43),
-      O => EMIO_tri_i_43(43),
-      T => EMIO_tri_t_43(43)
-    );
-EMIO_tri_iobuf_44: component IOBUF
-     port map (
-      I => EMIO_tri_o_44(44),
-      IO => EMIO_tri_io(44),
-      O => EMIO_tri_i_44(44),
-      T => EMIO_tri_t_44(44)
-    );
-EMIO_tri_iobuf_45: component IOBUF
-     port map (
-      I => EMIO_tri_o_45(45),
-      IO => EMIO_tri_io(45),
-      O => EMIO_tri_i_45(45),
-      T => EMIO_tri_t_45(45)
-    );
-EMIO_tri_iobuf_46: component IOBUF
-     port map (
-      I => EMIO_tri_o_46(46),
-      IO => EMIO_tri_io(46),
-      O => EMIO_tri_i_46(46),
-      T => EMIO_tri_t_46(46)
-    );
-EMIO_tri_iobuf_47: component IOBUF
-     port map (
-      I => EMIO_tri_o_47(47),
-      IO => EMIO_tri_io(47),
-      O => EMIO_tri_i_47(47),
-      T => EMIO_tri_t_47(47)
-    );
 EMIO_tri_iobuf_5: component IOBUF
      port map (
       I => EMIO_tri_o_5(5),
@@ -849,12 +795,6 @@ pynq_z2_i: component pynq_z2
       DDR_ras_n => DDR_ras_n,
       DDR_reset_n => DDR_reset_n,
       DDR_we_n => DDR_we_n,
-      EMIO_tri_i(47) => EMIO_tri_i_47(47),
-      EMIO_tri_i(46) => EMIO_tri_i_46(46),
-      EMIO_tri_i(45) => EMIO_tri_i_45(45),
-      EMIO_tri_i(44) => EMIO_tri_i_44(44),
-      EMIO_tri_i(43) => EMIO_tri_i_43(43),
-      EMIO_tri_i(42) => EMIO_tri_i_42(42),
       EMIO_tri_i(41) => EMIO_tri_i_41(41),
       EMIO_tri_i(40) => EMIO_tri_i_40(40),
       EMIO_tri_i(39) => EMIO_tri_i_39(39),
@@ -897,12 +837,6 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_i(2) => EMIO_tri_i_2(2),
       EMIO_tri_i(1) => EMIO_tri_i_1(1),
       EMIO_tri_i(0) => EMIO_tri_i_0(0),
-      EMIO_tri_o(47) => EMIO_tri_o_47(47),
-      EMIO_tri_o(46) => EMIO_tri_o_46(46),
-      EMIO_tri_o(45) => EMIO_tri_o_45(45),
-      EMIO_tri_o(44) => EMIO_tri_o_44(44),
-      EMIO_tri_o(43) => EMIO_tri_o_43(43),
-      EMIO_tri_o(42) => EMIO_tri_o_42(42),
       EMIO_tri_o(41) => EMIO_tri_o_41(41),
       EMIO_tri_o(40) => EMIO_tri_o_40(40),
       EMIO_tri_o(39) => EMIO_tri_o_39(39),
@@ -945,12 +879,6 @@ pynq_z2_i: component pynq_z2
       EMIO_tri_o(2) => EMIO_tri_o_2(2),
       EMIO_tri_o(1) => EMIO_tri_o_1(1),
       EMIO_tri_o(0) => EMIO_tri_o_0(0),
-      EMIO_tri_t(47) => EMIO_tri_t_47(47),
-      EMIO_tri_t(46) => EMIO_tri_t_46(46),
-      EMIO_tri_t(45) => EMIO_tri_t_45(45),
-      EMIO_tri_t(44) => EMIO_tri_t_44(44),
-      EMIO_tri_t(43) => EMIO_tri_t_43(43),
-      EMIO_tri_t(42) => EMIO_tri_t_42(42),
       EMIO_tri_t(41) => EMIO_tri_t_41(41),
       EMIO_tri_t(40) => EMIO_tri_t_40(40),
       EMIO_tri_t(39) => EMIO_tri_t_39(39),
@@ -1045,6 +973,12 @@ pynq_z2_i: component pynq_z2
       SPI_1_ss_i => SPI_1_ss_i,
       SPI_1_ss_o => SPI_1_ss_o,
       SPI_1_ss_t => SPI_1_ss_t,
+      TIMER_FREEZE => TIMER_FREEZE,
+      TIMER_IN_0 => TIMER_IN_0,
+      TIMER_IN_1 => TIMER_IN_1,
+      TIMER_OUT_0 => TIMER_OUT_0,
+      TIMER_OUT_1 => TIMER_OUT_1,
+      TIMER_PWM => TIMER_PWM,
       UART_1_rxd => UART_1_rxd,
       UART_1_txd => UART_1_txd
     );
