@@ -5,6 +5,20 @@
 		#size-cells = <1>;
 		compatible = "simple-bus";
 		ranges ;
+		pl_spi: axi_quad_spi@41e00000 {
+			bits-per-word = <8>;
+			clock-names = "ext_spi_clk", "s_axi_aclk";
+			clocks = <&clkc 15>, <&clkc 15>;
+			compatible = "xlnx,axi-quad-spi-3.2", "xlnx,xps-spi-2.00.a";
+			fifo-size = <16>;
+			interrupt-names = "ip2intc_irpt";
+			interrupt-parent = <&intc>;
+			interrupts = <0 31 1>;
+			num-cs = <0x3>;
+			reg = <0x41e00000 0x10000>;
+			xlnx,num-ss-bits = <0x3>;
+			xlnx,spi-mode = <0>;
+		};
 		pl_timer: timer@42800000 {
 			clock-frequency = <100000000>;
 			clock-names = "s_axi_aclk";

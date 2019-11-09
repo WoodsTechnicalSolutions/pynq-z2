@@ -13,7 +13,7 @@
 	xlnx,ptp-enet-clock = <0x6750918>;
 };
 &gpio0 {
-	emio-gpio-width = <42>;
+	emio-gpio-width = <36>;
 	gpio-mask-high = <0x0>;
 	gpio-mask-low = <0x5600>;
 };
@@ -31,7 +31,7 @@
 };
 &qspi {
 	is-dual = <0>;
-	num-cs = <1>;
+	num-cs = <0x1>;
 	spi-rx-bus-width = <4>;
 	spi-tx-bus-width = <4>;
 	status = "okay";
@@ -44,12 +44,12 @@
 };
 &spi0 {
 	is-decoded-cs = <0>;
-	num-cs = <3>;
+	num-cs = <0x3>;
 	status = "okay";
 };
 &spi1 {
 	is-decoded-cs = <0>;
-	num-cs = <3>;
+	num-cs = <0x3>;
 	status = "okay";
 };
 &uart0 {
