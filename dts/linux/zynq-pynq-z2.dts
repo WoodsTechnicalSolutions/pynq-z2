@@ -82,6 +82,11 @@
 			gpios = <&gpio0 65 GPIO_ACTIVE_HIGH>;
 			default-state = "off";
 		};
+		display_led { // LED BACKLIGHT PIN
+			label = "display:led";
+			gpios = <&gpio0 72 GPIO_ACTIVE_HIGH>;
+			default-state = "on";
+		};
 	};
 
 	gpio-keys {
@@ -106,6 +111,13 @@
 			linux,code = <BTN_TRIGGER_HAPPY4>; // Key Code 2c3
 			gpios = <&gpio0 69 GPIO_ACTIVE_LOW>;
 		};
+	};
+
+	display_supply: fixed_3v3@0 {
+		compatible = "regulator-fixed";
+		regulator-name = "fixed-supply";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
 	};
 };
 
@@ -136,12 +148,12 @@
 		"LED4_B", "LED4_G", "LED4_R", "LED5_B",
 		"LED5_G", "LED5_R", "LD0", "LD1",
 		"LD2", "LD3", "BTN0", "BTN1",
-		"BTN2", "BTN3", "PMODB_7", "PMODB_8",
-		"PMODB_9", "PMODB_10", "AR6", "AR7",
+		"BTN2", "BTN3", "PMODA_7", "PMODA_8",
+		"PMODB_7", "PMODB_8", "AR6", "AR7",
 		"AR8", "AR9", "AR10", "AR11",
-		"AR12", "AR13", "A", "RPIO_17_R",
-		"RPIO_22_R", "RPIO_14_R", "RPIO_15_R", "RPIO_18_R",
-		"RPIO_23_R", "RPIO_24_R", "gpio90_NC", "gpio91_NC",
+		"AR12", "AR13", "A", "RPIO_14_R",
+		"RPIO_15_R", "RPIO_18_R", "RPIO_23_R", "RPIO_24_R",
+		"RPIO_12_R", "RPIO_16_R", "gpio90_NC", "gpio91_NC",
 		"gpio92_NC", "gpio93_NC", "gpio94_NC", "gpio95_NC",
 		"gpio96_NC", "gpio97_NC", "gpio98_NC", "gpio99_NC",
 		"gpio100_NC", "gpio101_NC", "gpio102_NC", "gpio103_NC",
@@ -153,6 +165,7 @@
 
 &pl_xadc {
 	status = "okay";
+
 	xlnx,channels {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -183,39 +196,53 @@
 
 &pl_spi {
 	status = "okay";
-        spidev@0 {
-                compatible = "spidev";
-                reg = <0>;
-                spi-max-frequency = <5000000>;
-        };
-        spidev@1 {
-                compatible = "spidev";
-                reg = <1>;
-                spi-max-frequency = <5000000>;
-        };
-        spidev@2 {
-                compatible = "spidev";
-                reg = <2>;
-                spi-max-frequency = <5000000>;
-        };
+
+	spidev@0 {
+		compatible = "spidev";
+		reg = <0>;
+		spi-max-frequency = <5000000>;
+	};
+	spidev@1 {
+		compatible = "spidev";
+		reg = <1>;
+		spi-max-frequency = <5000000>;
+	};
+	spidev@2 {
+		compatible = "spidev";
+		reg = <2>;
+		spi-max-frequency = <5000000>;
+	};
 };
 
 &spi0 {
-        spidev@0 {
-                compatible = "spidev";
-                reg = <0>;
-                spi-max-frequency = <5000000>;
-        };
-        spidev@1 {
-                compatible = "spidev";
-                reg = <1>;
-                spi-max-frequency = <5000000>;
-        };
-        spidev@2 {
-                compatible = "spidev";
-                reg = <2>;
-                spi-max-frequency = <5000000>;
-        };
+	display: ili9341@0{
+		compatible = "ilitek,ili9341";
+		reg = <0>;
+		spi-max-frequency = <32000000>;
+		bgr;
+		fps = <60>;
+		debug = <0>;
+		rotate = <90>;
+		regwidth = <8>;
+		buswidth = <8>;
+		dc-gpios = <&gpio0 70 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&gpio0 71 GPIO_ACTIVE_HIGH>;
+	};
+	display_ts: ads7846@1 {
+		compatible = "ti,ads7846";
+		reg = <1>;
+		spi-max-frequency = <1000000>;
+		ti,swap-xy;
+		pendown-gpio = <&gpio0 73 0>;
+		interrupts = <73 0>;
+		interrupt-parent = <&gpio0>;
+		vcc-supply = <&display_supply>;
+	};
+	spidev@2 {
+		compatible = "spidev";
+		reg = <2>;
+		spi-max-frequency = <5000000>;
+	};
 };
 
 &spi1 {
@@ -238,6 +265,7 @@
 
 &ttc0 {
 	status = "okay";
+
 	clock-frequency = <0x7f28155>;
 	xlnx,ttc-clk0-clksrc = <0x0>; /* PWM 0 . AR0 */
 	xlnx,ttc-clk0-freq-hz = <0x7f28155>;
@@ -252,6 +280,7 @@
 
 &ttc1 {
 	status = "okay";
+
 	clock-frequency = <0x7f28155>;
 	xlnx,ttc-clk0-clksrc = <0x0>; /* PWM 3 . AR3 */
 	xlnx,ttc-clk0-freq-hz = <0x7f28155>;
@@ -262,4 +291,8 @@
 	xlnx,ttc-clk2-clksrc = <0x0>; /* PWM 5 . AR5 */
 	xlnx,ttc-clk2-freq-hz = <0x7f28155>;
 	clock-frequency-timer2 = <0x7f28155>;
+};
+
+&display {
+	status = "okay";
 };
