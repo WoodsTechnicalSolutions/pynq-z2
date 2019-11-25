@@ -237,6 +237,13 @@
 		interrupts = <73 0>;
 		interrupt-parent = <&gpio0>;
 		vcc-supply = <&display_supply>;
+		ti,x-min = /bits/ 16 <0>;
+		ti,x-max = /bits/ 16 <8000>;
+		ti,y-min = /bits/ 16 <0>;
+		ti,y-max = /bits/ 16 <4800>;
+		ti,x-plate-ohms = /bits/ 16 <40>;
+		ti,pressure-max = /bits/ 16 <255>;
+		wakeup-source;
 	};
 	spidev@2 {
 		compatible = "spidev";
@@ -294,5 +301,9 @@
 };
 
 &display {
+	status = "okay";
+};
+
+&display_ts {
 	status = "okay";
 };
