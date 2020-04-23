@@ -61,6 +61,9 @@ sdk/pcw.dtsi:
 	tail -n +7 sdk/pl.dtsi > dts/pl.dtsi
 	tail -n +7 sdk/system.dts > dts/system.dts
 	tail -n +7 sdk/system-top.dts > dts/system-top.dts
+	@sed -i -e 's,axi_quad_spi,spi,g' dts/pl.dtsi
+	@sed -i -e 's,7000.dtsi,7000-combined.dtsi,g' dts/system-top.dts
+	@printf "\n***** VERIFY THAT [ zynq-7000-common.dtsi ] IS CONSISTENT WITH XILINX, LINUX, AND U-BOOT *****\n"
 
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log

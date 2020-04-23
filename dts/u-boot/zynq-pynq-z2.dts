@@ -7,7 +7,7 @@
 	compatible = "digilent,zynq-artyz", "xlnx,zynq-7000";
 
 	chosen {
-		bootargs = "earlycon";
+		bootargs = "earlycon root=/dev/mmcblk0p2 rw rootfstype=ext4 rootwait";
 		stdout-path = "serial0:115200n8";
 	};
 
@@ -26,11 +26,14 @@
 };
 
 &gem0 {
+	u-boot,dm-pre-reloc;
 	status = "okay";
+
 	phy-handle = <&ethernet_phy>;
 
 	ethernet_phy: ethernet-phy@0 {
-		reg = <1>;
+		reg = <0>;
+		device_type = "ethernet-phy";
 	};
 };
 
