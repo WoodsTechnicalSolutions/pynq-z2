@@ -1,7 +1,7 @@
---Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+--Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
---Tool Version: Vivado v.2019.2 (lin64) Build 2700185 Thu Oct 24 18:45:48 MDT 2019
---Date        : Fri Nov  8 19:17:59 2019
+--Tool Version: Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
+--Date        : Wed Jun 17 19:48:20 2020
 --Host        : hostname running 64-bit Arch Linux
 --Command     : generate_target pynq_z2_wrapper.bd
 --Design      : pynq_z2_wrapper
@@ -103,20 +103,49 @@ architecture STRUCTURE of pynq_z2_wrapper is
     ADC_3_v_p : in STD_LOGIC;
     ADC_5_v_n : in STD_LOGIC;
     ADC_5_v_p : in STD_LOGIC;
+    EMIO_tri_i : in STD_LOGIC_VECTOR ( 35 downto 0 );
+    EMIO_tri_o : out STD_LOGIC_VECTOR ( 35 downto 0 );
+    EMIO_tri_t : out STD_LOGIC_VECTOR ( 35 downto 0 );
+    IIC_1_sda_i : in STD_LOGIC;
+    IIC_1_sda_o : out STD_LOGIC;
+    IIC_1_sda_t : out STD_LOGIC;
+    IIC_1_scl_i : in STD_LOGIC;
+    IIC_1_scl_o : out STD_LOGIC;
+    IIC_1_scl_t : out STD_LOGIC;
     FIXED_IO_mio : inout STD_LOGIC_VECTOR ( 53 downto 0 );
     FIXED_IO_ddr_vrn : inout STD_LOGIC;
     FIXED_IO_ddr_vrp : inout STD_LOGIC;
     FIXED_IO_ps_srstb : inout STD_LOGIC;
     FIXED_IO_ps_clk : inout STD_LOGIC;
     FIXED_IO_ps_porb : inout STD_LOGIC;
-    ADC_1_v_n : in STD_LOGIC;
-    ADC_1_v_p : in STD_LOGIC;
-    ADC_2_v_n : in STD_LOGIC;
-    ADC_2_v_p : in STD_LOGIC;
-    ADC_4_v_n : in STD_LOGIC;
-    ADC_4_v_p : in STD_LOGIC;
-    ADC_0_v_n : in STD_LOGIC;
-    ADC_0_v_p : in STD_LOGIC;
+    SPI_0_sck_i : in STD_LOGIC;
+    SPI_0_sck_o : out STD_LOGIC;
+    SPI_0_sck_t : out STD_LOGIC;
+    SPI_0_io0_i : in STD_LOGIC;
+    SPI_0_io0_o : out STD_LOGIC;
+    SPI_0_io0_t : out STD_LOGIC;
+    SPI_0_io1_i : in STD_LOGIC;
+    SPI_0_io1_o : out STD_LOGIC;
+    SPI_0_io1_t : out STD_LOGIC;
+    SPI_0_ss_i : in STD_LOGIC;
+    SPI_0_ss_o : out STD_LOGIC;
+    SPI_0_ss1_o : out STD_LOGIC;
+    SPI_0_ss2_o : out STD_LOGIC;
+    SPI_0_ss_t : out STD_LOGIC;
+    UART_1_txd : out STD_LOGIC;
+    UART_1_rxd : in STD_LOGIC;
+    SPI_2_io0_i : in STD_LOGIC;
+    SPI_2_io0_o : out STD_LOGIC;
+    SPI_2_io0_t : out STD_LOGIC;
+    SPI_2_io1_i : in STD_LOGIC;
+    SPI_2_io1_o : out STD_LOGIC;
+    SPI_2_io1_t : out STD_LOGIC;
+    SPI_2_sck_i : in STD_LOGIC;
+    SPI_2_sck_o : out STD_LOGIC;
+    SPI_2_sck_t : out STD_LOGIC;
+    SPI_2_ss_i : in STD_LOGIC_VECTOR ( 2 downto 0 );
+    SPI_2_ss_o : out STD_LOGIC_VECTOR ( 2 downto 0 );
+    SPI_2_ss_t : out STD_LOGIC;
     DDR_cas_n : inout STD_LOGIC;
     DDR_cke : inout STD_LOGIC;
     DDR_ck_n : inout STD_LOGIC;
@@ -132,35 +161,14 @@ architecture STRUCTURE of pynq_z2_wrapper is
     DDR_dq : inout STD_LOGIC_VECTOR ( 31 downto 0 );
     DDR_dqs_n : inout STD_LOGIC_VECTOR ( 3 downto 0 );
     DDR_dqs_p : inout STD_LOGIC_VECTOR ( 3 downto 0 );
-    EMIO_tri_i : in STD_LOGIC_VECTOR ( 35 downto 0 );
-    EMIO_tri_o : out STD_LOGIC_VECTOR ( 35 downto 0 );
-    EMIO_tri_t : out STD_LOGIC_VECTOR ( 35 downto 0 );
+    ADC_0_v_n : in STD_LOGIC;
+    ADC_0_v_p : in STD_LOGIC;
     IIC_0_sda_i : in STD_LOGIC;
     IIC_0_sda_o : out STD_LOGIC;
     IIC_0_sda_t : out STD_LOGIC;
     IIC_0_scl_i : in STD_LOGIC;
     IIC_0_scl_o : out STD_LOGIC;
     IIC_0_scl_t : out STD_LOGIC;
-    IIC_1_sda_i : in STD_LOGIC;
-    IIC_1_sda_o : out STD_LOGIC;
-    IIC_1_sda_t : out STD_LOGIC;
-    IIC_1_scl_i : in STD_LOGIC;
-    IIC_1_scl_o : out STD_LOGIC;
-    IIC_1_scl_t : out STD_LOGIC;
-    SPI_0_sck_i : in STD_LOGIC;
-    SPI_0_sck_o : out STD_LOGIC;
-    SPI_0_sck_t : out STD_LOGIC;
-    SPI_0_io0_i : in STD_LOGIC;
-    SPI_0_io0_o : out STD_LOGIC;
-    SPI_0_io0_t : out STD_LOGIC;
-    SPI_0_io1_i : in STD_LOGIC;
-    SPI_0_io1_o : out STD_LOGIC;
-    SPI_0_io1_t : out STD_LOGIC;
-    SPI_0_ss_i : in STD_LOGIC;
-    SPI_0_ss_o : out STD_LOGIC;
-    SPI_0_ss1_o : out STD_LOGIC;
-    SPI_0_ss2_o : out STD_LOGIC;
-    SPI_0_ss_t : out STD_LOGIC;
     SPI_1_sck_i : in STD_LOGIC;
     SPI_1_sck_o : out STD_LOGIC;
     SPI_1_sck_t : out STD_LOGIC;
@@ -175,20 +183,12 @@ architecture STRUCTURE of pynq_z2_wrapper is
     SPI_1_ss1_o : out STD_LOGIC;
     SPI_1_ss2_o : out STD_LOGIC;
     SPI_1_ss_t : out STD_LOGIC;
-    UART_1_txd : out STD_LOGIC;
-    UART_1_rxd : in STD_LOGIC;
-    SPI_2_io0_i : in STD_LOGIC;
-    SPI_2_io0_o : out STD_LOGIC;
-    SPI_2_io0_t : out STD_LOGIC;
-    SPI_2_io1_i : in STD_LOGIC;
-    SPI_2_io1_o : out STD_LOGIC;
-    SPI_2_io1_t : out STD_LOGIC;
-    SPI_2_ss_i : in STD_LOGIC_VECTOR ( 2 downto 0 );
-    SPI_2_ss_o : out STD_LOGIC_VECTOR ( 2 downto 0 );
-    SPI_2_ss_t : out STD_LOGIC;
-    SPI_2_sck_i : in STD_LOGIC;
-    SPI_2_sck_o : out STD_LOGIC;
-    SPI_2_sck_t : out STD_LOGIC
+    ADC_4_v_n : in STD_LOGIC;
+    ADC_4_v_p : in STD_LOGIC;
+    ADC_1_v_n : in STD_LOGIC;
+    ADC_1_v_p : in STD_LOGIC;
+    ADC_2_v_n : in STD_LOGIC;
+    ADC_2_v_p : in STD_LOGIC
   );
   end component pynq_z2;
   component IOBUF is

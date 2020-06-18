@@ -2,7 +2,7 @@ BOARD_NAME := pynq-z2
 DESIGN_NAME := pynq_z2
 
 VIVADO_BASE_DIR ?= /tools/Xilinx/Vivado
-VIVADO_RELEASE ?= 2019.2
+VIVADO_RELEASE ?= 2020.1
 
 SDK_BASE_DIR ?= /tools/Xilinx/SDK
 SDK_RELEASE ?= $(VIVADO_RELEASE)
