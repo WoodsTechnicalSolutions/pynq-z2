@@ -73,11 +73,6 @@
 			gpios = <&gpio0 65 GPIO_ACTIVE_HIGH>;
 			default-state = "off";
 		};
-		display_led { // LED BACKLIGHT PIN
-			label = "display:led";
-			gpios = <&gpio0 72 GPIO_ACTIVE_HIGH>;
-			default-state = "on";
-		};
 	};
 
 	gpio-keys {
@@ -237,10 +232,10 @@
 };
 
 &spi0 {
-	display: ili9341@0{
+	display: ili9341@0 {
 		compatible = "ilitek,ili9341";
 		reg = <0>;
-		spi-max-frequency = <32000000>;
+		spi-max-frequency = <10000000>;
 		bgr;
 		fps = <60>;
 		debug = <0>;
@@ -249,6 +244,7 @@
 		buswidth = <8>;
 		dc-gpios = <&gpio0 70 GPIO_ACTIVE_HIGH>;
 		reset-gpios = <&gpio0 71 GPIO_ACTIVE_HIGH>;
+		led-gpios = <&gpio0 72 GPIO_ACTIVE_HIGH>;
 	};
 	display_ts: ads7846@1 {
 		compatible = "ti,ads7846";
