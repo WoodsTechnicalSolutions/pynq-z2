@@ -1,23 +1,23 @@
 BOARD_NAME := pynq-z2
 DESIGN_NAME := pynq_z2
 
-VIVADO_BASE_DIR ?= /tools/Xilinx/Vivado
-VIVADO_RELEASE ?= 2020.1
+XILINX_RELEASE := 2020.2
 
-SDK_BASE_DIR ?= /tools/Xilinx/SDK
-SDK_RELEASE ?= $(VIVADO_RELEASE)
+VIVADO_BASE_DIR ?= /tools/Xilinx/Vivado/$(XILINX_RELEASE)
+
+VITIS_BASE_DIR ?= /tools/Xilinx/Vitis/$(XILINX_RELEASE)
 
 define vivado
-	@if ! [ -d $(VIVADO_BASE_DIR)/$(VIVADO_RELEASE) ]; then \
-		printf "***** MISSING XILINX VIVADO v$(VIVADO_RELEASE) INSTALLATION *****\n"; \
+	@if ! [ -d $(VIVADO_BASE_DIR) ]; then \
+		printf "***** MISSING XILINX VIVADO v$(XILINX_RELEASE) INSTALLATION *****\n"; \
 		exit 2; \
 	fi
 	@if [ "$1" = "bitstream" ]; then \
-		source $(VIVADO_BASE_DIR)/$(VIVADO_RELEASE)/settings64.sh && \
+		source $(VIVADO_BASE_DIR)/settings64.sh && \
 			vivado -mode batch -source $(DESIGN_NAME).tcl $1.tcl -notrace; \
 	else \
-		source $(VIVADO_BASE_DIR)/$(VIVADO_RELEASE)/settings64.sh && \
-			vivado -mode batch -source $1.tcl -notrace; \
+		source $(VITIS_BASE_DIR)/settings64.sh && \
+			xsct $1.tcl; \
 	fi
 endef
 
@@ -46,7 +46,7 @@ sdk/pcw.dtsi:
 	@if ! [ -d device-tree-xlnx ]; then \
 		git clone https://github.com/Xilinx/device-tree-xlnx.git; \
 		if [ -d device-tree-xlnx ]; then \
-			(cd device-tree-xlnx && git checkout xilinx-v$(VIVADO_RELEASE)); \
+			(cd device-tree-xlnx && git checkout xilinx-v$(XILINX_RELEASE)); \
 		else \
 			printf "***** DEVICETREE GIT CLONE FAILED *****\n"; \
 			exit 2; \

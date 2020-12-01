@@ -1,6 +1,9 @@
-// SPDX-License-Identifier: GPL-2.0
+// SPDX-License-Identifier: GPL-2.0+
 /*
- * Copyright (C) 2011 - 2014 Xilinx
+ * Xilinx Zynq 7000 DTSI
+ * Describes the hardware common to all Zynq 7000-based boards.
+ *
+ *  Copyright (C) 2011 - 2015 Xilinx
  */
 
 / {
@@ -265,8 +268,8 @@
 				status = "disabled";
 				compatible = "arm,pl353-nand-r2p1";
 				reg = <0xe1000000 0x1000000>;
-				#address-cells = <0x1>;
-				#size-cells = <0x1>;
+				#address-cells = <1>;
+				#size-cells = <1>;
 			};
 			nor0: flash@e2000000 {
 				status = "disabled";
@@ -379,9 +382,9 @@
 
 		devcfg: devcfg@f8007000 {
 			compatible = "xlnx,zynq-devcfg-1.0";
-			reg = <0xf8007000 0x100>;
 			interrupt-parent = <&intc>;
 			interrupts = <0 8 4>;
+			reg = <0xf8007000 0x100>;
 			clocks = <&clkc 12>, <&clkc 15>, <&clkc 16>, <&clkc 17>, <&clkc 18>;
 			clock-names = "ref_clk", "fclk0", "fclk1", "fclk2", "fclk3";
 			syscon = <&slcr>;
