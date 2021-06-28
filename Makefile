@@ -33,9 +33,9 @@ all: $(BOARD_NAME)
 
 $(BOARD_NAME): bitstream devicetree
 
-bitstream: sdk/$(DESIGN_NAME).bit
+bitstream: sdk/$(DESIGN_NAME).xsa
 
-sdk/$(DESIGN_NAME).bit sdk/$(DESIGN_NAME).xsa:
+sdk/$(DESIGN_NAME).xsa:
 	$(call vivado,bitstream)
 	@if ! [ -f $@ ]; then \
 		printf "***** BITSTREAM GENERATION FAILED *****\n"; \
