@@ -15,9 +15,9 @@
 		serial0 = &uart0;
 		serial1 = &uart1;
 		spi0 = &qspi;
-		spi1 = &pl_spi;
-		spi2 = &spi0;
-		spi3 = &spi1;
+		spi1 = &spi0;
+		spi2 = &spi1;
+		spi3 = &pl_spi;
 	};
 	memory {
 		device_type = "memory";

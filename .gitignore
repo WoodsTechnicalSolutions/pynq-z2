@@ -4,6 +4,7 @@
 /pynq_z2
 /sdk
 /zynq-mkbootimage
+/.Xil
 /*.patch
 *.jou
 *.log
