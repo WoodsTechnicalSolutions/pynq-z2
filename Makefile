@@ -19,7 +19,8 @@ define vivado
 			vivado -mode batch -source $(DESIGN_NAME).tcl $1.tcl -notrace; \
 		if [ -f $(BUILD_VHD) ]; then \
 			cp -v $(BUILD_VHD) hdl/; \
-			sed s,$(shell hostname | tr -d \\n),hostname, -i $(DESIGN_VHD); \
+			sed s,Date\ *\:.*,Date\ Removed\:, -i $(DESIGN_VHD); \
+			sed s,Host\ *\:.*,Host\ Removed\:, -i $(DESIGN_VHD); \
 		fi; \
 	else \
 		source $(VITIS_BASE_DIR)/settings64.sh && \

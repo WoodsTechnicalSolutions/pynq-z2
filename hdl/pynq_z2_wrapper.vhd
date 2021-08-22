@@ -1,8 +1,8 @@
 --Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
---Date        : Sun Jun 27 20:50:44 2021
---Host        : hostname running 64-bit Arch Linux
+--Date Removed:
+--Host Removed:
 --Command     : generate_target pynq_z2_wrapper.bd
 --Design      : pynq_z2_wrapper
 --Purpose     : IP block netlist
