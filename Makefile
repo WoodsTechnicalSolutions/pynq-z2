@@ -3,7 +3,7 @@ DESIGN_NAME := pynq_z2
 DESIGN_VHD := hdl/$(DESIGN_NAME)_wrapper.vhd
 BUILD_VHD := $(DESIGN_NAME)/$(DESIGN_NAME).gen/sources_1/bd/$(DESIGN_NAME)/hdl/$(DESIGN_NAME)_wrapper.vhd
 
-XILINX_RELEASE := 2021.2
+XILINX_RELEASE := 2022.1
 
 VIVADO_BASE_DIR ?= /tools/Xilinx/Vivado/$(XILINX_RELEASE)
 
@@ -70,7 +70,7 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	tail -n +7 sdk/system-top.dts > dts/system-top.dts
 	@sed -i -e 's,axi_quad_spi,spi,g' dts/pl.dtsi
 	@sed -i -e 's,7000.dtsi,7000-combined.dtsi,g' dts/system-top.dts
-	@printf "\n***** VERIFY THAT [ zynq-7000-common.dtsi ] IS CONSISTENT WITH XILINX, LINUX, AND U-BOOT SOURCE TREES *****\n"
+	@printf "\n***** VERIFY THAT [ zynq-7000-combined.dtsi ] IS CONSISTENT WITH XILINX, LINUX, AND U-BOOT SOURCE TREES *****\n"
 
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
