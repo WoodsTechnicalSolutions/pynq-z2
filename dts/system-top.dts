@@ -19,7 +19,7 @@
 		spi2 = &spi1;
 		spi3 = &pl_spi;
 	};
-	memory {
+	memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x20000000>;
 	};
