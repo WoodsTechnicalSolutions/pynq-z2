@@ -18,11 +18,9 @@
 	gpio-mask-low = <0x5600>;
 };
 &i2c0 {
-	clock-frequency = <400000>;
 	status = "okay";
 };
 &i2c1 {
-	clock-frequency = <400000>;
 	status = "okay";
 };
 &intc {

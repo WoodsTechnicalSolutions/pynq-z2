@@ -1,9 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
- * Xilinx Zynq 7000 DTSI
- * Describes the hardware common to all Zynq 7000-based boards.
+ * Copyright (C) 2011-2022 Xilinx, Inc.
+ * Copyright (C) 2022 Advanced Micro Devices, Inc. All Rights Reserved.
  *
- *  Copyright (C) 2011 - 2015 Xilinx
+ * This software is licensed under the terms of the GNU General Public
+ * License version 2, as published by the Free Software Foundation, and
+ * may be copied, distributed, and modified under those terms.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  */
 
 / {
@@ -49,8 +56,7 @@
 		compatible = "arm,cortex-a9-pmu";
 		interrupts = <0 5 4>, <0 6 4>;
 		interrupt-parent = <&intc>;
-		reg = <0xf8891000 0x1000>,
-		      <0xf8893000 0x1000>;
+		reg = < 0xf8891000 0x1000 0xf8893000 0x1000 >;
 	};
 
 	regulator_vccpint: fixedregulator {
@@ -96,7 +102,7 @@
 	};
 
 	amba: axi {
-		u-boot,dm-pre-reloc;
+		bootph-all;
 		compatible = "simple-bus";
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -151,6 +157,7 @@
 			compatible = "cdns,i2c-r1p10";
 			status = "disabled";
 			clocks = <&clkc 38>;
+			clock-frequency = <400000>;
 			interrupt-parent = <&intc>;
 			interrupts = <0 25 4>;
 			reg = <0xe0004000 0x1000>;
@@ -162,6 +169,7 @@
 			compatible = "cdns,i2c-r1p10";
 			status = "disabled";
 			clocks = <&clkc 39>;
+			clock-frequency = <400000>;
 			interrupt-parent = <&intc>;
 			interrupts = <0 48 4>;
 			reg = <0xe0005000 0x1000>;
@@ -331,14 +339,14 @@
 		};
 
 		slcr: slcr@f8000000 {
-			u-boot,dm-pre-reloc;
+			bootph-all;
 			#address-cells = <1>;
 			#size-cells = <1>;
 			compatible = "xlnx,zynq-slcr", "syscon", "simple-mfd";
 			reg = <0xF8000000 0x1000>;
 			ranges;
 			clkc: clkc@100 {
-				u-boot,dm-pre-reloc;
+				bootph-all;
 				#clock-cells = <1>;
 				compatible = "xlnx,ps7-clkc";
 				fclk-enable = <0xf>;
@@ -428,7 +436,7 @@
 		};
 
 		scutimer: timer@f8f00600 {
-			u-boot,dm-pre-reloc;
+			bootph-all;
 			interrupt-parent = <&intc>;
 			interrupts = <1 13 0x301>;
 			compatible = "arm,cortex-a9-twd-timer";

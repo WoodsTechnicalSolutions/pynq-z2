@@ -26,7 +26,7 @@
 };
 
 &gem0 {
-	u-boot,dm-pre-reloc;
+	bootph-all;
 	status = "okay";
 
 	phy-handle = <&ethernet_phy>;
@@ -38,17 +38,17 @@
 };
 
 &qspi {
-	u-boot,dm-pre-reloc;
+	bootph-all;
 	status = "okay";
 };
 
 &sdhci0 {
-	u-boot,dm-pre-reloc;
+	bootph-all;
 	status = "okay";
 };
 
 &uart0 {
-	u-boot,dm-pre-reloc;
+	bootph-all;
 	status = "okay";
 };
 
