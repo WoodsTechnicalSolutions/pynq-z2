@@ -1,6 +1,6 @@
 
 / {
-	amba_pl: amba_pl {
+	amba_pl: pl-bus {
 		#address-cells = <1>;
 		#size-cells = <1>;
 		compatible = "simple-bus";
