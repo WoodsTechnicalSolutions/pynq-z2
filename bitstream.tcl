@@ -13,6 +13,15 @@ if {[file exists ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bit] == 1} {
 		puts "***"
 		exit 1
 	}
+	write_cfgmem -force -format bin -interface smapx32 -disablebitswap -loadbit "up 0 ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bit" ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bin
+	if {[file exists ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bin] == 1} {
+		file copy -force ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bin ./sdk/pynq_z2_wrapper.bin
+	} else {
+		puts "***"
+		puts "*** ERROR: bitstream: MISSING BYTE SWAPPED BINARY ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bin"
+		puts "***"
+		exit 1
+	}
 } else {
 	puts "***"
 	puts "*** ERROR: bitstream: MISSING ./pynq_z2/pynq_z2.runs/impl_1/pynq_z2_wrapper.bit"
