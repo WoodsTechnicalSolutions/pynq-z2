@@ -99,6 +99,12 @@
 		};
 	};
 
+	display_backlight: ili9341_led {
+		status = "okay";
+		compatible = "gpio-backlight";
+		gpios = <&gpio0 72 GPIO_ACTIVE_HIGH>;
+	};
+
 	display_supply: fixed_3v3@0 {
 		compatible = "regulator-fixed";
 		regulator-name = "fixed-supply";
@@ -232,20 +238,34 @@
 };
 
 &spi0 {
-        spidev@0 {
-                compatible = "rohm,dh2228fv";
-                reg = <0>;
-                spi-max-frequency = <25000000>;
-        };
+	display: ili9341@0 {
+		status = "okay";
+		compatible = "adafruit,yx240qv29", "ilitek,ili9341";
+		reg = <0>;
+		bgr;
+		fps = <10>;
+		width = <320>;
+		height = <240>;
+		rotation = <270>;
+		buswidth = <8>;
+		dc-gpios = <&gpio0 70 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&gpio0 71 GPIO_ACTIVE_HIGH>;
+		backlight = <&display_backlight>;
+		vcc-supply = <&display_supply>;
+		vci-supply = <&display_supply>;
+		vddi-supply = <&display_supply>;
+		vddi-led-supply = <&display_supply>;
+		spi-max-frequency = <25000000>;
+		debug = <3>;
+	};
 	display_ts: ads7846@1 {
+		status = "okay";
 		compatible = "ti,ads7846";
 		reg = <1>;
-		spi-max-frequency = <1000000>;
-		ti,swap-xy;
 		pendown-gpio = <&gpio0 73 GPIO_ACTIVE_LOW>;
-		interrupts = <73 0>;
 		interrupt-parent = <&gpio0>;
-		vcc-supply = <&display_supply>;
+		interrupts = <73 0>;
+		ti,swap-xy;
 		ti,x-min = /bits/ 16 <0>;
 		ti,x-max = /bits/ 16 <8000>;
 		ti,y-min = /bits/ 16 <0>;
@@ -253,6 +273,8 @@
 		ti,x-plate-ohms = /bits/ 16 <40>;
 		ti,pressure-max = /bits/ 16 <255>;
 		wakeup-source;
+		vcc-supply = <&display_supply>;
+		spi-max-frequency = <1000000>;
 	};
 	spidev@2 {
                 compatible = "rohm,dh2228fv";
@@ -307,8 +329,4 @@
 	xlnx,ttc-clk2-clksrc = <0x0>; /* PWM 5 . AR5 */
 	xlnx,ttc-clk2-freq-hz = <0x7f28155>;
 	clock-frequency-timer2 = <0x7f28155>;
-};
-
-&display_ts {
-	status = "okay";
 };
