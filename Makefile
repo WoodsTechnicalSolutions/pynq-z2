@@ -69,6 +69,26 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	tail -n +7 sdk/system.dts > dts/system.dts
 	tail -n +7 sdk/system-top.dts > dts/system-top.dts
 	@sed -i -e 's,axi_quad_spi,spi,g' dts/pl.dtsi
+	@if [ -n "`grep -e 'void perf_reset_and_start_timer()' sdk/ps7_init_gpl.c`" ]; then \
+		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init.c; \
+		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init.h; \
+		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init_gpl.c; \
+		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init_gpl.h; \
+		sed -i -e 's,ps7_debug(),ps7_debug(void),' sdk/ps7_init.c; \
+		sed -i -e 's,ps7_debug(),ps7_debug(void),' sdk/ps7_init.h; \
+		sed -i -e 's,ps7_debug(),ps7_debug(void),' sdk/ps7_init_gpl.c; \
+		sed -i -e 's,ps7_debug(),ps7_debug(void),' sdk/ps7_init_gpl.h; \
+		sed -i -e 's,ps7_post_config(),ps7_post_config(void),' sdk/ps7_init.c; \
+		sed -i -e 's,ps7_post_config(),ps7_post_config(void),' sdk/ps7_init.h; \
+		sed -i -e 's,ps7_post_config(),ps7_post_config(void),' sdk/ps7_init_gpl.c; \
+		sed -i -e 's,ps7_post_config(),ps7_post_config(void),' sdk/ps7_init_gpl.h; \
+		sed -i -e 's,ps7GetSiliconVersion\ ()\ {,ps7GetSiliconVersion(void)\ {,' sdk/ps7_init.c; \
+		sed -i -e 's,ps7GetSiliconVersion\ ()\ {,ps7GetSiliconVersion(void)\ {,' sdk/ps7_init_gpl.c; \
+		sed -i -e 's,void\ perf_reset_and_start_timer(),void\ perf_reset_and_start_timer(void),' sdk/ps7_init.c; \
+		sed -i -e 's,void\ perf_reset_and_start_timer(),void\ perf_reset_and_start_timer(void),' sdk/ps7_init.h; \
+		sed -i -e 's,void\ perf_reset_and_start_timer(),void\ perf_reset_and_start_timer(void),' sdk/ps7_init_gpl.c; \
+		sed -i -e 's,void\ perf_reset_and_start_timer(),void\ perf_reset_and_start_timer(void),' sdk/ps7_init_gpl.h; \
+	fi
 
 clean:
 	$(RM) -r $(DESIGN_NAME) NA *.jou *.log
