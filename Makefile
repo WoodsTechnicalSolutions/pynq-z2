@@ -3,7 +3,7 @@ DESIGN_NAME := pynq_z2
 DESIGN_VHD := hdl/$(DESIGN_NAME)_wrapper.vhd
 BUILD_VHD := $(DESIGN_NAME)/$(DESIGN_NAME).gen/sources_1/bd/$(DESIGN_NAME)/hdl/$(DESIGN_NAME)_wrapper.vhd
 
-XILINX_RELEASE := 2025.1
+XILINX_RELEASE := 2025.2
 
 VIVADO_BASE_DIR ?= /tools/Xilinx/$(XILINX_RELEASE)/Vivado
 
