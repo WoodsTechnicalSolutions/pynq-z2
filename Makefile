@@ -3,7 +3,8 @@ DESIGN_NAME := pynq_z2
 DESIGN_VHD := hdl/$(DESIGN_NAME)_wrapper.vhd
 BUILD_VHD := $(DESIGN_NAME)/$(DESIGN_NAME).gen/sources_1/bd/$(DESIGN_NAME)/hdl/$(DESIGN_NAME)_wrapper.vhd
 
-XILINX_RELEASE := 2025.2
+XILINX_RELEASE := 2025.2.1
+XILINX_RELEASE_TAG := 2025.2
 
 VIVADO_BASE_DIR ?= /tools/Xilinx/$(XILINX_RELEASE)/Vivado
 
@@ -49,7 +50,7 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	@if ! [ -d device-tree-xlnx ]; then \
 		git clone https://github.com/Xilinx/device-tree-xlnx.git; \
 		if [ -d device-tree-xlnx ]; then \
-			(cd device-tree-xlnx && git checkout xilinx_v$(XILINX_RELEASE)); \
+			(cd device-tree-xlnx && git checkout xilinx_v$(XILINX_RELEASE_TAG)); \
 		else \
 			printf "***** DEVICETREE GIT CLONE FAILED *****\n"; \
 			exit 2; \
@@ -57,7 +58,7 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	else \
 		(cd device-tree-xlnx && \
 			git fetch --all && \
-			git checkout xilinx_v$(XILINX_RELEASE)); \
+			git checkout xilinx_v$(XILINX_RELEASE_TAG)); \
 	fi
 	$(call vivado,devicetree)
 	@if ! [ -f sdk/pcw.dtsi ] || ! [ -f sdk/pl.dtsi ]; then \
