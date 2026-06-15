@@ -70,6 +70,10 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	tail -n +7 sdk/system.dts > dts/system.dts
 	tail -n +7 sdk/system-top.dts > dts/system-top.dts
 	@sed -i -e 's,axi_quad_spi,spi,g' dts/pl.dtsi
+	@mkdir -p dts/linux/xilinx
+	@mkdir -p dts/u-boot/xilinx
+	@cp -v dts/*.dts* dts/linux/xilinx/
+	@cp -v dts/*.dts* dts/u-boot/xilinx/
 	@if [ -n "`grep -e 'void perf_reset_and_start_timer()' sdk/ps7_init_gpl.c`" ]; then \
 		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init.c; \
 		sed -i -e 's,ps7_init(),ps7_init(void),' sdk/ps7_init.h; \
