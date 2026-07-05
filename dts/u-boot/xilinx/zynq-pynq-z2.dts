@@ -1,6 +1,6 @@
 /dts-v1/;
 
-#include "system-top.dts"
+#include "system-top.dtsi"
 
 / {
 	model = "Zynq PYNQ-Z2 Development Board";
@@ -57,3 +57,5 @@
 	dr_mode = "host";
 	usb-phy = <&usb_phy0>;
 };
+
+#include "system.dtsi"

@@ -4,10 +4,12 @@
 /pynq_z2
 /sdk
 /zynq-mkbootimage
+/dts/system.dts
+/dts/system-top.dts
 /dts/*/xilinx/pcw.dtsi
 /dts/*/xilinx/pl.dtsi
-/dts/*/xilinx/system-top.dts
-/dts/*/xilinx/system.dts
+/dts/*/xilinx/system-top.dtsi
+/dts/*/xilinx/system.dtsi
 /.Xil
 /*.patch
 *.jou

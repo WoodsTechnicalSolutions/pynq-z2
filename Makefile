@@ -67,8 +67,8 @@ sdk/pcw.dtsi: sdk/$(DESIGN_NAME).xsa
 	fi
 	tail -n +7 sdk/pcw.dtsi > dts/pcw.dtsi
 	tail -n +7 sdk/pl.dtsi > dts/pl.dtsi
-	tail -n +7 sdk/system.dts > dts/system.dts
-	tail -n +7 sdk/system-top.dts > dts/system-top.dts
+	tail -n +7 sdk/system.dts > dts/system.dtsi
+	tail -n +7 sdk/system-top.dts > dts/system-top.dtsi
 	@sed -i -e 's,axi_quad_spi,spi,g' dts/pl.dtsi
 	@mkdir -p dts/linux/xilinx
 	@mkdir -p dts/u-boot/xilinx
