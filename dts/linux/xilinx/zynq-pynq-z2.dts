@@ -13,12 +13,20 @@
 		stdout-path = "serial0:115200n8";
 	};
 
-        usb_phy0: phy0 {
-                compatible = "ulpi-phy";
-                #phy-cells = <0>;
+	aliases {
+		ethernet0 = &gem0;
+		serial0 = &uart0;
+		spi0 = &qspi;
+		mmc0 = &sdhci0;
+	};
+
+	usb_phy0: phy0 {
+		compatible = "usb-nop-xceiv";
+		#phy-cells = <0>;
                 reg = <0xe0002000 0x1000>;
                 view-port = <0x170>;
                 drv-vbus;
+		reset-gpios = <&gpio0 46 1>;
         };
 
 	gpio-leds {
@@ -143,7 +151,7 @@
 &usb0 {
 	status = "okay";
 	dr_mode = "host";
-        usb-phy = <&usb_phy0>;
+	usb-phy = <&usb_phy0>;
 };
 
 /* PYNQ-Z2 GPIO Schematic Symbols (see also fpga/sdk/ps7_init.html)

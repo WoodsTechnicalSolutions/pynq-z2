@@ -21,6 +21,9 @@
 	usb_phy0: phy0 {
 		compatible = "usb-nop-xceiv";
 		#phy-cells = <0>;
+                reg = <0xe0002000 0x1000>;
+                view-port = <0x170>;
+                drv-vbus;
 		reset-gpios = <&gpio0 46 1>;
 	};
 };
